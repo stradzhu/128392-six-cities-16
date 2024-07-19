@@ -25,12 +25,14 @@ export type CardType = {
 type SettingType = {
   offersCount: number;
   favoritesCount: number;
+  authorizationStatus: AuthorizationStatus;
   cards: CardType[];
 };
 
 export const Setting: SettingType = {
   offersCount: 10,
   favoritesCount: 1,
+  authorizationStatus: AuthorizationStatus.Auth,
   cards: [
     {
       id: 111,

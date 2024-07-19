@@ -8,9 +8,9 @@ type FavoritesProps = {
 
 function FavoritesScreen({favoritesCount}: FavoritesProps): JSX.Element {
   return (
-    <main className="page__main page__main--favorites">
+    <main className={`page__main page__main--favorites ${favoritesCount ? '' : 'page__main--favorites-empty'}`}>
       <Helmet>
-        <title>6 cities: favorites</title>
+        <title>6 cities: favorites {favoritesCount ? '' : 'empty'}</title>
       </Helmet>
       <div className="page__favorites-container container">
         {favoritesCount ? <Favorites/> : <FavoritesEmpty/>}
