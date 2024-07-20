@@ -1,5 +1,6 @@
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link, NavLink, useLocation} from 'react-router-dom';
+import * as classNames from 'classnames';
 
 type HeaderProps = {
   favoritesCount: number;
@@ -37,12 +38,14 @@ function HeaderNav({favoritesCount, authorizationStatus}: HeaderProps): JSX.Elem
 function Header({favoritesCount, authorizationStatus}: HeaderProps): JSX.Element {
   const location = useLocation();
 
+  // throw new Error('Test error');
+
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <NavLink to={AppRoute.Main} className={({isActive}) => isActive ? 'header__logo-link header__logo-link--active' : 'header__logo-link'}>
+            <NavLink to={AppRoute.Main} className={({isActive}) => classNames('header__logo-link', {'header__logo-link--active': isActive})}>
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </NavLink>
           </div>

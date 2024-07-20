@@ -1,7 +1,7 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {CardType, AppRoute, AuthorizationStatus} from '../../const';
-import RequireAuth from '../require-auth/require-auth';
+import {PrivateRoute, PublicRoute} from '../access-route/access-route';
 import Layout from '../layout/layout';
 
 import MainScreen from '../../pages/main/main';
@@ -9,6 +9,7 @@ import FavoritesScreen from '../../pages/favorites/favorites';
 import LoginScreen from '../../pages/login/login';
 import OfferScreen from '../../pages/offer/offer';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import ErrorScreen from '../../pages/error-screen/error-screen';
 
 type AppProps = {
   offersCount: number;
@@ -18,24 +19,39 @@ type AppProps = {
 }
 
 function App({offersCount, cards, favoritesCount, authorizationStatus}: AppProps): JSX.Element {
+  const router = createBrowserRouter([
+    {
+      path: AppRoute.Main,
+      element: <Layout authorizationStatus={authorizationStatus} favoritesCount={favoritesCount}/>,
+      children: [
+        {
+          index: true,
+          element: <MainScreen offersCount={offersCount} cards={cards}/>,
+        },
+        {
+          path: AppRoute.Offer,
+          element: <OfferScreen authorizationStatus={authorizationStatus}/>,
+        },
+        {
+          path: AppRoute.Favorites,
+          element: <PrivateRoute authorizationStatus={authorizationStatus}><FavoritesScreen favoritesCount={favoritesCount}/></PrivateRoute>,
+        },
+        {
+          path: AppRoute.Login,
+          element: <PublicRoute authorizationStatus={authorizationStatus}><LoginScreen/></PublicRoute>,
+        },
+        {
+          path: AppRoute.NotFound,
+          element: <NotFoundScreen/>,
+        }
+      ],
+      errorElement: <ErrorScreen/>
+    }
+  ]);
+
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus} favoritesCount={favoritesCount}/>}>
-            <Route index element={<MainScreen offersCount={offersCount} cards={cards} />} />
-            <Route path={AppRoute.Login} element={<LoginScreen/>} />
-            <Route path={AppRoute.Favorites} element={
-              <RequireAuth authorizationStatus={authorizationStatus}>
-                <FavoritesScreen favoritesCount={favoritesCount}/>
-              </RequireAuth>
-            }
-            />
-            <Route path={AppRoute.Offer} element={<OfferScreen authorizationStatus={authorizationStatus}/>} />
-            <Route path={AppRoute.NotFound} element={<NotFoundScreen />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router}/>
     </HelmetProvider>
   );
 }
