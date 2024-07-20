@@ -1,3 +1,17 @@
+export enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id',
+  NotFound = '*'
+}
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
 export type CardType = {
   id?: number;
   name: string;
@@ -10,11 +24,15 @@ export type CardType = {
 
 type SettingType = {
   offersCount: number;
+  favoritesCount: number;
+  authorizationStatus: AuthorizationStatus;
   cards: CardType[];
 };
 
 export const Setting: SettingType = {
-  offersCount: 456,
+  offersCount: 10,
+  favoritesCount: 1,
+  authorizationStatus: AuthorizationStatus.Auth,
   cards: [
     {
       id: 111,

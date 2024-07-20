@@ -9,6 +9,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offersCount={Setting.offersCount} cards={Setting.cards} />
+    <App
+      offersCount={Setting.offersCount}
+      favoritesCount={Setting.favoritesCount}
+      cards={Setting.cards}
+      authorizationStatus={Setting.authorizationStatus}
+    />
   </React.StrictMode>
 );
