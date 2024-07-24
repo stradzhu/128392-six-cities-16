@@ -1,3 +1,5 @@
+import {getRating} from '../../utils';
+
 function Favorites(): JSX.Element {
   return (
     <section className="favorites">
@@ -36,7 +38,7 @@ function Favorites(): JSX.Element {
                 </div>
                 <div className="place-card__rating rating">
                   <div className="place-card__stars rating__stars">
-                    <span style={{width: '100%'}}></span>
+                    <span style={{width: getRating(5)}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                 </div>
@@ -68,7 +70,7 @@ function Favorites(): JSX.Element {
                 </div>
                 <div className="place-card__rating rating">
                   <div className="place-card__stars rating__stars">
-                    <span style={{width: '80%'}}></span>
+                    <span style={{width: getRating(4)}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                 </div>
@@ -111,7 +113,7 @@ function Favorites(): JSX.Element {
                 </div>
                 <div className="place-card__rating rating">
                   <div className="place-card__stars rating__stars">
-                    <span style={{width: '100%'}}></span>
+                    <span style={{width: getRating(3)}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                 </div>
