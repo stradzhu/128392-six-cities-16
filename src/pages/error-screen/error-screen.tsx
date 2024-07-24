@@ -12,6 +12,7 @@ function ErrorScreen(): JSX.Element {
         <div className="cities__places-container cities__places-container--empty container">
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">{(error as Error)?.message}</b>
+            <pre style={{textAlign: 'left'}}>{(error as Error)?.stack}</pre>
             <hr/>
             <p className="cities__status-description">
               <Link to='/'>

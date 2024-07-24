@@ -1,6 +1,7 @@
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {CardType, AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {OffersType} from '../../types/offer';
 import {PrivateRoute, PublicRoute} from '../access-route/access-route';
 import Layout from '../layout/layout';
 
@@ -10,15 +11,16 @@ import LoginScreen from '../../pages/login/login';
 import OfferScreen from '../../pages/offer/offer';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import ErrorScreen from '../../pages/error-screen/error-screen';
+import {ReviewsType} from '../../types/reviews';
 
 type AppProps = {
-  offersCount: number;
   favoritesCount: number;
-  cards: CardType[];
+  offers: OffersType;
+  reviews: ReviewsType;
   authorizationStatus: AuthorizationStatus;
 }
 
-function App({offersCount, cards, favoritesCount, authorizationStatus}: AppProps): JSX.Element {
+function App({offers, reviews, favoritesCount, authorizationStatus}: AppProps): JSX.Element {
   const router = createBrowserRouter([
     {
       path: AppRoute.Main,
@@ -26,11 +28,11 @@ function App({offersCount, cards, favoritesCount, authorizationStatus}: AppProps
       children: [
         {
           index: true,
-          element: <MainScreen offersCount={offersCount} cards={cards}/>,
+          element: <MainScreen offers={offers}/>,
         },
         {
           path: AppRoute.Offer,
-          element: <OfferScreen authorizationStatus={authorizationStatus}/>,
+          element: <OfferScreen offers={offers} reviews={reviews} authorizationStatus={authorizationStatus}/>,
         },
         {
           path: AppRoute.Favorites,
