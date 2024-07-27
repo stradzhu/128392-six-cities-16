@@ -1,6 +1,6 @@
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link, NavLink, useLocation} from 'react-router-dom';
-import * as classNames from 'classnames';
+import {clsx} from 'clsx';
 
 type HeaderProps = {
   favoritesCount: number;
@@ -45,7 +45,7 @@ function Header({favoritesCount, authorizationStatus}: HeaderProps): JSX.Element
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <NavLink to={AppRoute.Main} className={({isActive}) => classNames('header__logo-link', {'header__logo-link--active': isActive})}>
+            <NavLink to={AppRoute.Main} className={({isActive}) => clsx('header__logo-link', {'header__logo-link--active': isActive})}>
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </NavLink>
           </div>

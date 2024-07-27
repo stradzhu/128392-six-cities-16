@@ -1,4 +1,4 @@
-import * as classNames from 'classnames';
+import {clsx} from 'clsx';
 
 type FavoriteButtonProps = {
   className: string;
@@ -12,7 +12,7 @@ function FavoriteButton({className, isFavorite}: FavoriteButtonProps): JSX.Eleme
   const imgHeight = className === OFFER_CLASS_NAME ? 33 : 19;
 
   return (
-    <button className={classNames(`${className}__bookmark-button`, {[`${className}__bookmark-button--active`]: isFavorite}, 'button')} type="button">
+    <button className={clsx(`${className}__bookmark-button`, {[`${className}__bookmark-button--active`]: isFavorite}, 'button')} type="button">
       <svg className="place-card__bookmark-icon" width={imgWidth} height={imgHeight}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

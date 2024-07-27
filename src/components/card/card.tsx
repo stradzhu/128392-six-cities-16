@@ -1,4 +1,4 @@
-import * as classNames from 'classnames';
+import {clsx} from 'clsx';
 import {OfferCardType} from '../../types/offer';
 import {generatePath, Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
@@ -32,7 +32,7 @@ function Card({offerCard, className, onMouseEnter, onMouseLeave}: CardProps): JS
           <img className="place-card__image" src={previewImage} width={imgWidth} height={imgHeight} alt="Place image" />
         </Link>
       </div>
-      <div className={classNames({'favorites__card-info': className === FAVORITES_CLASS_NAME}, 'place-card__info')}>
+      <div className={clsx({'favorites__card-info': className === FAVORITES_CLASS_NAME}, 'place-card__info')}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

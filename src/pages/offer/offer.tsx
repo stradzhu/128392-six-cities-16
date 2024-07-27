@@ -8,7 +8,7 @@ import {ReviewsType} from '../../types/review';
 import {getRating, getBedroomsString, getAdultsString} from '../../utils';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
-import * as classNames from 'classnames';
+import {clsx} from 'clsx';
 
 type OfferProps = {
   offers: OffersType;
@@ -89,7 +89,7 @@ function OfferScreen({offers, nearOfferCards, reviews, authorizationStatus}: Off
             <div className="offer__host">
               <h2 className="offer__host-title">Meet the host</h2>
               <div className="offer__host-user user">
-                <div className={classNames('offer__avatar-wrapper', {'offer__avatar-wrapper--pro': offer.host.isPro}, 'user__avatar-wrapper')}>
+                <div className={clsx('offer__avatar-wrapper', {'offer__avatar-wrapper--pro': offer.host.isPro}, 'user__avatar-wrapper')}>
                   <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                 </div>
                 <span className="offer__user-name">
