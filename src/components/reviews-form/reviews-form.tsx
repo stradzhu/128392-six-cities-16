@@ -1,12 +1,12 @@
 import {ChangeEvent, Dispatch, Fragment, SetStateAction, SyntheticEvent, useState} from 'react';
-import {RatingStar} from '../../const';
-import {ReviewsType, ReviewType} from '../../types/reviews';
+import {RatingStar, ReviewSetting} from '../../const';
+import {ReviewsType, ReviewType} from '../../types/review';
 
-type ReviewsFormProp = {
+type ReviewsFormProps = {
   setReviewsData: Dispatch<SetStateAction<ReviewsType>>;
 }
 
-function ReviewsForm({setReviewsData}: ReviewsFormProp): JSX.Element {
+function ReviewsForm({setReviewsData}: ReviewsFormProps): JSX.Element {
   const [formData, setFormData] = useState({
     review: '',
     rating: '0',
@@ -17,7 +17,9 @@ function ReviewsForm({setReviewsData}: ReviewsFormProp): JSX.Element {
     setFormData({...formData, [name]: value});
   };
 
-  const disableSubmit = ():boolean => formData.review.length <= 50 || !formData.rating;
+  const disableSubmit = (): boolean => formData.review.length < ReviewSetting.MIN
+    || formData.review.length > ReviewSetting.MAX
+    || !formData.rating;
 
   const handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
@@ -27,12 +29,15 @@ function ReviewsForm({setReviewsData}: ReviewsFormProp): JSX.Element {
     }
 
     const newReview: ReviewType = {
-      id: Math.random(),
-      name: 'Dima',
-      avatar: 'img/avatar-max.jpg',
-      rating: Number(formData.rating),
-      text: formData.review,
+      id: String(Math.random()),
+      comment: formData.review,
       date: new Date().toISOString(),
+      rating: Number(formData.rating),
+      user: {
+        name: 'Dima',
+        avatarUrl: 'img/static/avatar/3.jpg',
+        isPro: false
+      }
     };
 
     setReviewsData((reviews) => {
@@ -47,10 +52,6 @@ function ReviewsForm({setReviewsData}: ReviewsFormProp): JSX.Element {
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
-      <h3 style={{width: '100%'}}>
-        Для теста: formData.rating = {formData.rating}
-        <br/>  Для теста: formData.review = {formData.review}
-      </h3>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RatingStar.map(({mark, title})=>(
@@ -80,7 +81,7 @@ function ReviewsForm({setReviewsData}: ReviewsFormProp): JSX.Element {
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewSetting.MIN} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={disableSubmit()}>Submit</button>
       </div>

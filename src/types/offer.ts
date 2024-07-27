@@ -1,38 +1,34 @@
-type HostType = {
-  name: string;
-  avatar: string;
-  isPro: boolean;
-  description: string;
-}
+import {LocationType} from './location';
+import {UserType} from './user';
 
-export type CityType = {
-  location: {
-    latitude: number;
-    longitude: number;
-  };
-  title: string;
-}
-
-export type OfferType = {
+type OfferTemplateType = {
   id: string;
   title: string;
-  images: {
-    id: number;
-    path: string;
-  }[];
-  isPremium: boolean;
-  isFavorite: boolean;
-  price: number;
-  rating: number;
   type: string;
-  bedroomsCount: number;
+  price: number;
+  city: {
+    name: string;
+    location: LocationType;
+  };
+  location: LocationType;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+};
+
+export type OfferCardType = OfferTemplateType & {
+  previewImage: string;
+};
+
+export type OffersCardType = OfferCardType[];
+
+export type OfferType = OfferTemplateType & {
+  description: string;
+  images: string[];
+  goods: string[];
+  host: UserType;
+  bedrooms: number;
   maxAdults: number;
-  inside: {
-    id: number;
-    title: string;
-  }[];
-  host: HostType;
-  city: CityType;
-}
+};
 
 export type OffersType = OfferType[];

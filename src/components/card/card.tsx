@@ -1,54 +1,57 @@
-import {OfferType} from '../../types/offer';
+import * as classNames from 'classnames';
+import {OfferCardType} from '../../types/offer';
 import {generatePath, Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {getRating} from '../../utils';
+import {getRating, upFirstLetter} from '../../utils';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardProps = {
-  offer: OfferType;
-  blockClass: string;
-  elementClass: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  offerCard: OfferCardType;
+  className: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
-function Card({offer, blockClass, elementClass, onMouseEnter, onMouseLeave}: CardProps): JSX.Element {
+const FAVORITES_CLASS_NAME = 'favorites';
+
+function Card({offerCard, className, onMouseEnter, onMouseLeave}: CardProps): JSX.Element {
+  const imgWidth = className === FAVORITES_CLASS_NAME ? 150 : 260;
+  const imgHeight = className === FAVORITES_CLASS_NAME ? 110 : 200;
+
+  const {isPremium, id, previewImage, price, isFavorite, rating, title, type} = offerCard;
+
   return (
-    <article className={`${blockClass} place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      {offer.isPremium && (
+    <article className={`${className}__card place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className={`${elementClass} place-card__image-wrapper`}>
-        <Link to={generatePath(AppRoute.Offer, {id: offer.id})}>
-          <img className="place-card__image" src={offer.images[0].path} width="260" height="200" alt="Place image" />
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
+        <Link to={generatePath(AppRoute.Offer, {id})}>
+          <img className="place-card__image" src={previewImage} width={imgWidth} height={imgHeight} alt="Place image" />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={classNames({'favorites__card-info': className === FAVORITES_CLASS_NAME}, 'place-card__info')}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer.price}</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${offer.isFavorite && 'place-card__bookmark-button--active'} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
+          <FavoriteButton className="place-card" isFavorite={isFavorite}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: getRating(offer.rating)}}></span>
+            <span style={{width: getRating(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, {id: offer.id})}>
-            {offer.title}
+          <Link to={generatePath(AppRoute.Offer, {id})}>
+            {title}
           </Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{upFirstLetter(type)}</p>
       </div>
     </article>
   );
