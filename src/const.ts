@@ -12,19 +12,20 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const URL_MARKER_DEFAULT = '/img/pin.svg';
-
-export const URL_MARKER_CURRENT = '/img/pin-active.svg';
+export const MapMarker = {
+  Default: '/img/pin.svg',
+  Current: '/img/pin-active.svg'
+} as const;
 
 export const MAX_OFFER_PHOTO = 6;
 
 export const ReviewSetting = {
-  MIN: 50,
-  MAX: 300,
-  MAX_COUNT_PER_PAGE: 10
-};
+  Min: 50,
+  Max: 300,
+  MaxCountPerPage: 10
+} as const;
 
-export const ALL_CITY_LIST = [
+export const AllCityList = [
   'Paris',
   'Cologne',
   'Brussels',
@@ -33,21 +34,18 @@ export const ALL_CITY_LIST = [
   'Dusseldorf',
 ] as const;
 
-export const DEFAULT_CITY = ALL_CITY_LIST[0];
+export const DEFAULT_CITY = AllCityList[0];
 
 export const SortTypes = {
-  POPULAR: 'Popular',
-  PRICE_DOWN: 'Price: low to high',
-  PRICE_UP: 'Price: high to low',
-  RATING_DOWN: 'Top rated first',
+  Popular: 'Popular',
+  PriceDown: 'Price: low to high',
+  PriceUp: 'Price: high to low',
+  RatingDown: 'Top rated first',
 } as const;
 
-export const DEFAULT_SORT_TYPE = SortTypes.POPULAR;
+export const DEFAULT_SORT_TYPE = SortTypes.Popular;
 
-export const RatingStar: {
-  mark: number;
-  title: string;
-}[] = [
+export const RatingStar = [
   {
     mark: 5,
     title: 'perfect',
@@ -68,4 +66,4 @@ export const RatingStar: {
     mark: 1,
     title: 'terribly',
   },
-];
+] as const;

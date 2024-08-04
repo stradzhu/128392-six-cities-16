@@ -12,7 +12,7 @@ export const getAdultsString = (count: number) => `Max ${count} adult${count > 1
 
 export const getActualReviews = (reviews: ReviewsType): ReviewsType => (
   reviews.slice().sort((reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date))
-    .slice(0, ReviewSetting.MAX_COUNT_PER_PAGE));
+    .slice(0, ReviewSetting.MaxCountPerPage));
 
 export const getAttributeDate = (date: string) => new Date(date).toLocaleString('en-US');
 

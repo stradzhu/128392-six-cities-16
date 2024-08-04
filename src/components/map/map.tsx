@@ -2,7 +2,7 @@ import {Icon, Marker, Map as MapLeaflet, TileLayer} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {PointsType} from '../../types/offer';
 import {useRef, useEffect} from 'react';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
+import {MapMarker} from '../../const';
 
 type MapProps = {
   points: PointsType;
@@ -10,25 +10,26 @@ type MapProps = {
 }
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: MapMarker.Default,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39]
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: MapMarker.Current,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39]
 });
 
 // Почему сделал так, а не как в примере-репозитории intensive-design-demo?
-// Основная причина, хотелось, чтобы все маркеры не удалялись при наведении на какой-то маркер
-// А в отдельный, кастомный хук не вынес, т.к. хотел, чтобы было по другому, чем в примере
+// Основная причина, хотелось, чтобы все маркеры не удалялись при наведении на какой-то маркер,
+// а только точечно обновлялись иконки у нужных маркеров
+// И в отдельный, кастомный хук не вынес, т.к. хотел, чтобы было по другому, чем в примере
 
 function Map({points, hoveredOfferId}: MapProps): JSX.Element {
   console.log('Map', hoveredOfferId); // eslint-disable-line no-console
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement>(null);
   const isRenderedMapRef = useRef<boolean>(false);
   const mapLeaflet = useRef<MapLeaflet | null>(null);
   const mapPoints = useRef<{ [key: string]: Marker }>({});
@@ -42,7 +43,7 @@ function Map({points, hoveredOfferId}: MapProps): JSX.Element {
       return;
     }
 
-    mapLeaflet.current = new MapLeaflet(mapRef.current as HTMLDivElement);
+    mapLeaflet.current = new MapLeaflet(mapRef.current);
 
     const tileLayer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'

@@ -3,11 +3,11 @@ import {OffersCardType} from '../../types/offer';
 import Main from '../../components/main/main';
 import MainEmpty from '../../components/main-empty/main-empty';
 import CityList from '../../components/city-list/city-list';
-import {ALL_CITY_LIST, SortTypes} from '../../const';
+import {AllCityList, SortTypes} from '../../const';
 
 type MainProps = {
   offersCard: OffersCardType;
-  activeCity: typeof ALL_CITY_LIST[number];
+  activeCity: typeof AllCityList[number];
   sortType: typeof SortTypes[keyof typeof SortTypes];
 }
 

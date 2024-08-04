@@ -1,6 +1,6 @@
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {ALL_CITY_LIST, AppRoute, AuthorizationStatus, SortTypes} from '../../const';
+import {AllCityList, AppRoute, AuthorizationStatus, SortTypes} from '../../const';
 import {OffersCardType, OffersType} from '../../types/offer';
 import {PrivateRoute, PublicRoute} from '../access-route/access-route';
 import Layout from '../layout/layout';
@@ -14,7 +14,7 @@ import ErrorScreen from '../../pages/error-screen/error-screen';
 import {ReviewsType} from '../../types/review';
 
 type AppProps = {
-  activeCity: typeof ALL_CITY_LIST[number];
+  activeCity: typeof AllCityList[number];
   sortType: typeof SortTypes[keyof typeof SortTypes];
   offers: OffersType;
   offersCard: OffersCardType;
