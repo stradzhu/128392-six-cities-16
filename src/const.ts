@@ -12,13 +12,37 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const Setting: {
-  favoritesCount: number;
-  authorizationStatus: AuthorizationStatus;
-} = {
-  favoritesCount: 1,
-  authorizationStatus: AuthorizationStatus.Auth,
+export const URL_MARKER_DEFAULT = '/img/pin.svg';
+
+export const URL_MARKER_CURRENT = '/img/pin-active.svg';
+
+export const MAX_OFFER_PHOTO = 6;
+
+export const ReviewSetting = {
+  MIN: 50,
+  MAX: 300,
+  MAX_COUNT_PER_PAGE: 10
 };
+
+export const ALL_CITY_LIST = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+] as const;
+
+export const DEFAULT_CITY = ALL_CITY_LIST[0];
+
+export const SortTypes = {
+  POPULAR: 'Popular',
+  PRICE_DOWN: 'Price: low to high',
+  PRICE_UP: 'Price: high to low',
+  RATING_DOWN: 'Top rated first',
+} as const;
+
+export const DEFAULT_SORT_TYPE = SortTypes.POPULAR;
 
 export const RatingStar: {
   mark: number;

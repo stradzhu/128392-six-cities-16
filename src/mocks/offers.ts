@@ -2,647 +2,294 @@ import {OffersType} from '../types/offer';
 
 export const offers: OffersType = [
   {
-    id: '1',
-    title: 'id 1, Amsterdam, Beautiful & luxurious studio at great location',
+    id: '6ba1dd4b-66cc-40b4-97cd-c965b0fe4434',
+    title: 'The house among olive ',
+    description: 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',
+    type: 'house',
+    price: 816,
     images: [
-      {
-        id: 1,
-        path: 'img/room.jpg',
-      },
-      {
-        id: 2,
-        path: 'img/apartment-01.jpg',
-      },
-      {
-        id: 3,
-        path: 'img/apartment-02.jpg',
-      },
-      {
-        id: 4,
-        path: 'img/apartment-03.jpg',
-      },
-      {
-        id: 5,
-        path: 'img/studio-01.jpg',
-      },
-      {
-        id: 6,
-        path: 'img/apartment-01.jpg',
-      },
+      'img/static/hotel/12.jpg',
+      'img/static/hotel/14.jpg',
+      'img/static/hotel/15.jpg',
+      'img/static/hotel/18.jpg',
+      'img/static/hotel/1.jpg',
+      'img/static/hotel/9.jpg'
     ],
-    isPremium: true,
-    isFavorite: false,
-    price: 200,
-    rating: 4.5,
-    type: 'Apartment',
-    bedroomsCount: 3,
-    maxAdults: 4,
-    inside: [
-      {
-        id: 1,
-        title: 'Wi-Fi',
-      },
-      {
-        id: 2,
-        title: 'Heating',
-      },
-      {
-        id: 3,
-        title: 'Kitchen',
-      },
-      {
-        id: 4,
-        title: 'Fridge',
-      },
-      {
-        id: 5,
-        title: 'Washing machine',
-      },
-      {
-        id: 6,
-        title: 'Coffee machine',
-      },
-      {
-        id: 7,
-        title: 'Dishwasher',
-      },
-      {
-        id: 8,
-        title: 'Towels',
-      },
-      {
-        id: 9,
-        title: 'Baby seat',
-      },
-      {
-        id: 10,
-        title: 'Cabel TV',
-      },
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.868610000000004,
+      longitude: 2.342499,
+      zoom: 16
+    },
+    goods: [
+      'Cable TV',
+      'Washing machine',
+      'Air conditioning',
+      'Wi-Fi',
+      'Laptop friendly workspace',
+      'Breakfast',
+      'Coffee machine',
+      'Dishwasher',
+      'Heating'
     ],
     host: {
-      name: 'Angelina',
-      avatar: 'img/avatar-angelina.jpg',
       isPro: true,
-      description: '<p class="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p><p class="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>',
+      name: 'Angelina',
+      avatarUrl: 'img/static/host/avatar-angelina.jpg'
     },
-    city: {
-      location: {
-        latitude: 52.3909553943508,
-        longitude: 4.85309666406198,
-      },
-      title: 'Amsterdam',
-    },
-  },
-  {
-    id: '2',
-    title: 'id 2, Amsterdam, Beautiful & luxurious studio at great location',
-    images: [
-      {
-        id: 1,
-        path: 'img/apartment-01.jpg',
-      },
-      {
-        id: 2,
-        path: 'img/room.jpg',
-      },
-      {
-        id: 3,
-        path: 'img/apartment-02.jpg',
-      },
-      {
-        id: 4,
-        path: 'img/apartment-03.jpg',
-      },
-      {
-        id: 5,
-        path: 'img/studio-01.jpg',
-      },
-      {
-        id: 6,
-        path: 'img/apartment-01.jpg',
-      },
-    ],
     isPremium: false,
     isFavorite: true,
-    price: 100,
-    rating: 4,
-    type: 'Apartment',
-    bedroomsCount: 3,
-    maxAdults: 4,
-    inside: [
-      {
-        id: 1,
-        title: 'Wi-Fi',
-      },
-      {
-        id: 2,
-        title: 'Heating',
-      },
-      {
-        id: 3,
-        title: 'Kitchen',
-      },
-      {
-        id: 4,
-        title: 'Fridge',
-      },
-      {
-        id: 5,
-        title: 'Washing machine',
-      },
-      {
-        id: 6,
-        title: 'Coffee machine',
-      },
-      {
-        id: 7,
-        title: 'Dishwasher',
-      },
-      {
-        id: 8,
-        title: 'Towels',
-      },
-      {
-        id: 9,
-        title: 'Baby seat',
-      },
-      {
-        id: 10,
-        title: 'Cabel TV',
-      },
-    ],
-    host: {
-      name: 'Angelina',
-      avatar: 'img/avatar-angelina.jpg',
-      isPro: true,
-      description: '<p class="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p><p class="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>',
-    },
-    city: {
-      location: {
-        latitude: 52.369553943508,
-        longitude: 4.85309666406198,
-      },
-      title: 'Amsterdam',
-    },
+    rating: 4.2,
+    bedrooms: 1,
+    maxAdults: 3
   },
   {
-    id: '3',
-    title: 'id 3, Amsterdam, Beautiful & luxurious studio at great location',
+    id: '7ff1b879-6ec3-4153-916a-d8e6ece36799',
+    title: 'Amazing and Extremely Central Flat',
+    description: 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
+    type: 'room',
+    price: 161,
     images: [
-      {
-        id: 1,
-        path: 'img/apartment-02.jpg',
-      },
-      {
-        id: 2,
-        path: 'img/apartment-01.jpg',
-      },
-      {
-        id: 3,
-        path: 'img/room.jpg',
-      },
-      {
-        id: 4,
-        path: 'img/apartment-03.jpg',
-      },
-      {
-        id: 5,
-        path: 'img/studio-01.jpg',
-      },
-      {
-        id: 6,
-        path: 'img/apartment-01.jpg',
-      },
+      'img/static/hotel/14.jpg',
+      'img/static/hotel/19.jpg',
+      'img/static/hotel/8.jpg',
+      'img/static/hotel/2.jpg',
+      'img/static/hotel/6.jpg',
+      'img/static/hotel/13.jpg'
     ],
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.858610000000006,
+      longitude: 2.330499,
+      zoom: 16
+    },
+    goods: [
+      'Laptop friendly workspace',
+      'Baby seat',
+      'Towels',
+      'Coffee machine',
+      'Washing machine',
+      'Cable TV',
+      'Kitchen',
+      'Breakfast',
+      'Fridge',
+      'Heating'
+    ],
+    host: {
+      isPro: true,
+      name: 'Angelina',
+      avatarUrl: 'img/static/host/avatar-angelina.jpg'
+    },
     isPremium: true,
     isFavorite: true,
-    price: 400,
-    rating: 5,
-    type: 'Apartment',
-    bedroomsCount: 3,
-    maxAdults: 4,
-    inside: [
-      {
-        id: 1,
-        title: 'Wi-Fi',
-      },
-      {
-        id: 2,
-        title: 'Heating',
-      },
-      {
-        id: 3,
-        title: 'Kitchen',
-      },
-      {
-        id: 4,
-        title: 'Fridge',
-      },
-      {
-        id: 5,
-        title: 'Washing machine',
-      },
-      {
-        id: 6,
-        title: 'Coffee machine',
-      },
-      {
-        id: 7,
-        title: 'Dishwasher',
-      },
-      {
-        id: 8,
-        title: 'Towels',
-      },
-      {
-        id: 9,
-        title: 'Baby seat',
-      },
-      {
-        id: 10,
-        title: 'Cabel TV',
-      },
-    ],
-    host: {
-      name: 'Angelina',
-      avatar: 'img/avatar-angelina.jpg',
-      isPro: true,
-      description: '<p class="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p><p class="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>',
-    },
-    city: {
-      location: {
-        latitude: 52.3909553943508,
-        longitude: 4.929309666406198,
-      },
-      title: 'Amsterdam',
-    },
+    rating: 3.3,
+    bedrooms: 1,
+    maxAdults: 1
   },
   {
-    id: '4',
-    title: 'id 4, Amsterdam, Beautiful & luxurious studio at great location',
+    id: '205a8ecf-7253-42b1-a4b6-44972543a964',
+    title: 'Canal View Prinsengracht',
+    description: 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
+    type: 'hotel',
+    price: 383,
     images: [
-      {
-        id: 1,
-        path: 'img/apartment-03.jpg',
-      },
-      {
-        id: 2,
-        path: 'img/apartment-01.jpg',
-      },
-      {
-        id: 3,
-        path: 'img/apartment-02.jpg',
-      },
-      {
-        id: 4,
-        path: 'img/room.jpg',
-      },
-      {
-        id: 5,
-        path: 'img/studio-01.jpg',
-      },
-      {
-        id: 6,
-        path: 'img/apartment-01.jpg',
-      },
+      'img/static/hotel/12.jpg',
+      'img/static/hotel/6.jpg',
+      'img/static/hotel/10.jpg',
+      'img/static/hotel/20.jpg',
+      'img/static/hotel/9.jpg',
+      'img/static/hotel/5.jpg'
     ],
-    isPremium: false,
-    isFavorite: false,
-    price: 300,
-    rating: 3.5,
-    type: 'Apartment',
-    bedroomsCount: 3,
-    maxAdults: 4,
-    inside: [
-      {
-        id: 1,
-        title: 'Wi-Fi',
-      },
-      {
-        id: 2,
-        title: 'Heating',
-      },
-      {
-        id: 3,
-        title: 'Kitchen',
-      },
-      {
-        id: 4,
-        title: 'Fridge',
-      },
-      {
-        id: 5,
-        title: 'Washing machine',
-      },
-      {
-        id: 6,
-        title: 'Coffee machine',
-      },
-      {
-        id: 7,
-        title: 'Dishwasher',
-      },
-      {
-        id: 8,
-        title: 'Towels',
-      },
-      {
-        id: 9,
-        title: 'Baby seat',
-      },
-      {
-        id: 10,
-        title: 'Cabel TV',
-      },
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.834610000000005,
+      longitude: 2.335499,
+      zoom: 16
+    },
+    goods: [
+      'Kitchen',
+      'Cable TV',
+      'Towels',
+      'Laptop friendly workspace',
+      'Wi-Fi'
     ],
     host: {
-      name: 'Angelina',
-      avatar: 'img/avatar-angelina.jpg',
       isPro: true,
-      description: '<p class="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p><p class="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>',
-    },
-    city: {
-      location: {
-        latitude: 52.3809553943508,
-        longitude: 4.939309666406198,
-      },
-      title: 'Amsterdam',
-    },
-  },
-  {
-    id: '5',
-    title: 'id 5, Paris, Beautiful & luxurious studio at great location',
-    images: [
-      {
-        id: 1,
-        path: 'img/room.jpg',
-      },
-      {
-        id: 2,
-        path: 'img/apartment-01.jpg',
-      },
-      {
-        id: 3,
-        path: 'img/apartment-02.jpg',
-      },
-      {
-        id: 4,
-        path: 'img/apartment-03.jpg',
-      },
-      {
-        id: 5,
-        path: 'img/studio-01.jpg',
-      },
-      {
-        id: 6,
-        path: 'img/apartment-01.jpg',
-      },
-    ],
-    isPremium: true,
-    isFavorite: false,
-    price: 600,
-    rating: 2,
-    type: 'Apartment',
-    bedroomsCount: 3,
-    maxAdults: 4,
-    inside: [
-      {
-        id: 1,
-        title: 'Wi-Fi',
-      },
-      {
-        id: 2,
-        title: 'Heating',
-      },
-      {
-        id: 3,
-        title: 'Kitchen',
-      },
-      {
-        id: 4,
-        title: 'Fridge',
-      },
-      {
-        id: 5,
-        title: 'Washing machine',
-      },
-      {
-        id: 6,
-        title: 'Coffee machine',
-      },
-      {
-        id: 7,
-        title: 'Dishwasher',
-      },
-      {
-        id: 8,
-        title: 'Towels',
-      },
-      {
-        id: 9,
-        title: 'Baby seat',
-      },
-      {
-        id: 10,
-        title: 'Cabel TV',
-      },
-    ],
-    host: {
       name: 'Angelina',
-      avatar: 'img/avatar-angelina.jpg',
-      isPro: true,
-      description: '<p class="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p><p class="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>',
+      avatarUrl: 'img/static/host/avatar-angelina.jpg'
     },
-    city: {
-      location: {
-        latitude: 52.3909553943508,
-        longitude: 4.85309666406198,
-      },
-      title: 'Paris',
-    },
-  },
-  {
-    id: '6',
-    title: 'id 6, Paris, Beautiful & luxurious studio at great location',
-    images: [
-      {
-        id: 1,
-        path: 'img/apartment-01.jpg',
-      },
-      {
-        id: 2,
-        path: 'img/room.jpg',
-      },
-      {
-        id: 3,
-        path: 'img/apartment-02.jpg',
-      },
-      {
-        id: 4,
-        path: 'img/apartment-03.jpg',
-      },
-      {
-        id: 5,
-        path: 'img/studio-01.jpg',
-      },
-      {
-        id: 6,
-        path: 'img/apartment-01.jpg',
-      },
-    ],
     isPremium: false,
     isFavorite: true,
-    price: 500,
-    rating: 2.5,
-    type: 'Apartment',
-    bedroomsCount: 3,
-    maxAdults: 4,
-    inside: [
-      {
-        id: 1,
-        title: 'Wi-Fi',
-      },
-      {
-        id: 2,
-        title: 'Heating',
-      },
-      {
-        id: 3,
-        title: 'Kitchen',
-      },
-      {
-        id: 4,
-        title: 'Fridge',
-      },
-      {
-        id: 5,
-        title: 'Washing machine',
-      },
-      {
-        id: 6,
-        title: 'Coffee machine',
-      },
-      {
-        id: 7,
-        title: 'Dishwasher',
-      },
-      {
-        id: 8,
-        title: 'Towels',
-      },
-      {
-        id: 9,
-        title: 'Baby seat',
-      },
-      {
-        id: 10,
-        title: 'Cabel TV',
-      },
-    ],
-    host: {
-      name: 'Angelina',
-      avatar: 'img/avatar-angelina.jpg',
-      isPro: true,
-      description: '<p class="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p><p class="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>',
-    },
-    city: {
-      location: {
-        latitude: 52.369553943508,
-        longitude: 4.85309666406198,
-      },
-      title: 'Paris',
-    },
+    rating: 1.3,
+    bedrooms: 1,
+    maxAdults: 5
   },
   {
-    id: '7',
-    title: 'id 7, Cologne, Beautiful & luxurious studio at great location',
+    id: 'fe3a1eb0-1077-41bb-b271-a046d7c34f33',
+    title: 'Wood and stone place',
+    description: 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
+    type: 'house',
+    price: 951,
     images: [
-      {
-        id: 1,
-        path: 'img/apartment-02.jpg',
-      },
-      {
-        id: 2,
-        path: 'img/apartment-01.jpg',
-      },
-      {
-        id: 3,
-        path: 'img/room.jpg',
-      },
-      {
-        id: 4,
-        path: 'img/apartment-03.jpg',
-      },
-      {
-        id: 5,
-        path: 'img/studio-01.jpg',
-      },
-      {
-        id: 6,
-        path: 'img/apartment-01.jpg',
-      },
+      'img/static/hotel/8.jpg',
+      'img/static/hotel/1.jpg',
+      'img/static/hotel/5.jpg',
+      'img/static/hotel/13.jpg',
+      'img/static/hotel/9.jpg',
+      'img/static/hotel/15.jpg'
     ],
-    isPremium: true,
-    isFavorite: false,
-    price: 700,
-    rating: 3,
-    type: 'Apartment',
-    bedroomsCount: 3,
-    maxAdults: 4,
-    inside: [
-      {
-        id: 1,
-        title: 'Wi-Fi',
-      },
-      {
-        id: 2,
-        title: 'Heating',
-      },
-      {
-        id: 3,
-        title: 'Kitchen',
-      },
-      {
-        id: 4,
-        title: 'Fridge',
-      },
-      {
-        id: 5,
-        title: 'Washing machine',
-      },
-      {
-        id: 6,
-        title: 'Coffee machine',
-      },
-      {
-        id: 7,
-        title: 'Dishwasher',
-      },
-      {
-        id: 8,
-        title: 'Towels',
-      },
-      {
-        id: 9,
-        title: 'Baby seat',
-      },
-      {
-        id: 10,
-        title: 'Cabel TV',
-      },
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.85761,
+      longitude: 2.358499,
+      zoom: 16
+    },
+    goods: [
+      'Air conditioning',
+      'Wi-Fi',
+      'Breakfast',
+      'Dishwasher',
+      'Laptop friendly workspace',
+      'Coffee machine',
+      'Washing machine',
+      'Kitchen',
+      'Heating',
+      'Baby seat',
+      'Towels',
+      'Fridge'
     ],
     host: {
-      name: 'Angelina',
-      avatar: 'img/avatar-angelina.jpg',
       isPro: true,
-      description: '<p class="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p><p class="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>',
+      name: 'Angelina',
+      avatarUrl: 'img/static/host/avatar-angelina.jpg'
     },
-    city: {
-      location: {
-        latitude: 52.3909553943508,
-        longitude: 4.929309666406198,
-      },
-      title: 'Cologne',
-    },
+    isPremium: true,
+    isFavorite: false,
+    rating: 3.8,
+    bedrooms: 1,
+    maxAdults: 8
   },
+  {
+    id: 'c37df0e5-3a77-401d-8dfd-793a671d7243',
+    title: 'Beautiful & luxurious apartment at great location',
+    description: 'I am happy to welcome you to my apartment in the city center! Three word: location, cosy and chic!',
+    type: 'house',
+    price: 581,
+    images: [
+      'img/static/hotel/15.jpg',
+      'img/static/hotel/2.jpg',
+      'img/static/hotel/10.jpg',
+      'img/static/hotel/5.jpg',
+      'img/static/hotel/1.jpg',
+      'img/static/hotel/17.jpg'
+    ],
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.87561,
+      longitude: 2.375499,
+      zoom: 16
+    },
+    goods: [
+      'Kitchen',
+      'Dishwasher',
+      'Washer',
+      'Baby seat',
+      'Fridge',
+      'Wi-Fi',
+      'Air conditioning',
+      'Washing machine',
+      'Breakfast',
+      'Towels'
+    ],
+    host: {
+      isPro: true,
+      name: 'Angelina',
+      avatarUrl: 'img/static/host/avatar-angelina.jpg'
+    },
+    isPremium: false,
+    isFavorite: false,
+    rating: 3.8,
+    bedrooms: 5,
+    maxAdults: 7
+  },
+  {
+    id: 'ad577345-5e98-4dc8-8913-98a4a9c811f2',
+    title: 'Penthouse, 4-5 rooms + 5 balconies',
+    description: 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',
+    type: 'hotel',
+    price: 231,
+    images: [
+      'img/static/hotel/10.jpg',
+      'img/static/hotel/2.jpg',
+      'img/static/hotel/12.jpg',
+      'img/static/hotel/7.jpg',
+      'img/static/hotel/1.jpg',
+      'img/static/hotel/17.jpg'
+    ],
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.87961000000001,
+      longitude: 2.353499,
+      zoom: 16
+    },
+    goods: [
+      'Laptop friendly workspace',
+      'Wi-Fi',
+      'Breakfast',
+      'Baby seat',
+      'Fridge'
+    ],
+    host: {
+      isPro: true,
+      name: 'Angelina',
+      avatarUrl: 'img/static/host/avatar-angelina.jpg'
+    },
+    isPremium: false,
+    isFavorite: true,
+    rating: 3.9,
+    bedrooms: 4,
+    maxAdults: 3
+  }
 ];

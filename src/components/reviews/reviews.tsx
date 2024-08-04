@@ -1,15 +1,15 @@
 import {AuthorizationStatus} from '../../const';
-import {ReviewsType} from '../../types/reviews';
+import {ReviewsType} from '../../types/review';
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewsForm from '../reviews-form/reviews-form';
 import {useState} from 'react';
 
-type ReviewsProp = {
+type ReviewsProps = {
   reviews: ReviewsType;
   authorizationStatus: AuthorizationStatus;
 }
 
-function Reviews({reviews, authorizationStatus}: ReviewsProp): JSX.Element {
+function Reviews({reviews, authorizationStatus}: ReviewsProps): JSX.Element {
   const isAuthenticated = authorizationStatus === AuthorizationStatus.Auth;
 
   const [reviewsData, setReviewsData] = useState(reviews);

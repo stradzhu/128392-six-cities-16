@@ -1,27 +1,34 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, MAX_OFFER_PHOTO} from '../../const';
 import CardList from '../../components/card-list/card-list';
 import Reviews from '../../components/reviews/reviews';
-import {OffersType} from '../../types/offer';
-import {ReviewsType} from '../../types/reviews';
-import {getRating} from '../../utils';
+import {OffersCardType, OffersType} from '../../types/offer';
+import {ReviewsType} from '../../types/review';
+import {getRating, getBedroomsString, getAdultsString} from '../../utils';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
+import {clsx} from 'clsx';
+import Map from '../../components/map/map';
 
 type OfferProps = {
   offers: OffersType;
+  nearOfferCards: OffersCardType;
   reviews: ReviewsType;
   authorizationStatus: AuthorizationStatus;
 }
 
-function OfferScreen({offers, reviews, authorizationStatus}: OfferProps): JSX.Element {
+function OfferScreen({offers, nearOfferCards, reviews, authorizationStatus}: OfferProps): JSX.Element {
   const {id: offerId} = useParams();
 
-  const offer = offers.find((item) => String(item.id) === offerId);
+  const offer = offers.find((item) => item.id === offerId);
 
   if (!offer) {
     return <NotFoundScreen/>;
   }
+
+  const mapPoints = nearOfferCards.map(({location, id}) => ({location, id}));
+  mapPoints.push({location: offer.location, id: offer.id});
 
   return (
     <main className="page__main page__main--offer">
@@ -31,8 +38,8 @@ function OfferScreen({offers, reviews, authorizationStatus}: OfferProps): JSX.El
       <section className="offer">
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
-            {offer.images.map(({id, path})=>(
-              <div className="offer__image-wrapper" key={id}>
+            {offer.images.slice(0, MAX_OFFER_PHOTO).map((path)=>(
+              <div className="offer__image-wrapper" key={path}>
                 <img className="offer__image" src={path} alt="" />
               </div>
             ))}
@@ -49,12 +56,7 @@ function OfferScreen({offers, reviews, authorizationStatus}: OfferProps): JSX.El
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <button className="offer__bookmark-button button" type="button">
-                <svg className="offer__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <FavoriteButton className="offer" isFavorite={offer.isFavorite}/>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
@@ -68,10 +70,10 @@ function OfferScreen({offers, reviews, authorizationStatus}: OfferProps): JSX.El
                 {offer.type}
               </li>
               <li className="offer__feature offer__feature--bedrooms">
-                {offer.bedroomsCount} Bedrooms
+                {getBedroomsString(offer.bedrooms)}
               </li>
               <li className="offer__feature offer__feature--adults">
-                Max {offer.maxAdults} adults
+                {getAdultsString(offer.maxAdults)}
               </li>
             </ul>
             <div className="offer__price">
@@ -81,9 +83,9 @@ function OfferScreen({offers, reviews, authorizationStatus}: OfferProps): JSX.El
             <div className="offer__inside">
               <h2 className="offer__inside-title">What&apos;s inside</h2>
               <ul className="offer__inside-list">
-                {offer.inside.map(({id, title}) => (
-                  <li className="offer__inside-item" key={id}>
-                    {title}
+                {offer.goods.map((good) => (
+                  <li className="offer__inside-item" key={good}>
+                    {good}
                   </li>
                 ))}
               </ul>
@@ -91,7 +93,7 @@ function OfferScreen({offers, reviews, authorizationStatus}: OfferProps): JSX.El
             <div className="offer__host">
               <h2 className="offer__host-title">Meet the host</h2>
               <div className="offer__host-user user">
-                <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                <div className={clsx('offer__avatar-wrapper', {'offer__avatar-wrapper--pro': offer.host.isPro}, 'user__avatar-wrapper')}>
                   <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                 </div>
                 <span className="offer__user-name">
@@ -102,18 +104,24 @@ function OfferScreen({offers, reviews, authorizationStatus}: OfferProps): JSX.El
                       Pro
                   </span>}
               </div>
-              <div className="offer__description" dangerouslySetInnerHTML={{__html: offer.host.description}} />
+              <div className="offer__description">
+                <p className="offer__text">
+                  {offer.description}
+                </p>
+              </div>
             </div>
             <Reviews reviews={reviews} authorizationStatus={authorizationStatus}/>
           </div>
         </div>
-        <section className="offer__map map"></section>
+        <section className="offer__map map">
+          <Map points={mapPoints} hoveredOfferId={offer.id}/>
+        </section>
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <CardList offers={offers.slice(0, 3)} blockClass="near-places__card" elementClass="near-places__image-wrapper"/>
+            <CardList offersCard={nearOfferCards} className="near-places"/>
           </div>
         </section>
       </div>

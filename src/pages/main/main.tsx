@@ -1,25 +1,30 @@
 import {Helmet} from 'react-helmet-async';
-import {OffersType} from '../../types/offer';
+import {OffersCardType} from '../../types/offer';
 import Main from '../../components/main/main';
 import MainEmpty from '../../components/main-empty/main-empty';
 import CityList from '../../components/city-list/city-list';
+import {ALL_CITY_LIST, SortTypes} from '../../const';
 
 type MainProps = {
-  offers: OffersType;
+  offersCard: OffersCardType;
+  activeCity: typeof ALL_CITY_LIST[number];
+  sortType: typeof SortTypes[keyof typeof SortTypes];
 }
 
-function MainScreen({offers}: MainProps): JSX.Element {
+function MainScreen({activeCity, sortType, offersCard}: MainProps): JSX.Element {
+
+
   return (
-    <main className={`page__main page__main--index ${offers.length ? '' : 'page__main--index-empty'}`}>
+    <main className={`page__main page__main--index ${offersCard.length ? '' : 'page__main--index-empty'}`}>
       <Helmet>
         <title>6 cities</title>
       </Helmet>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
-        <CityList/>
+        <CityList activeCity={activeCity}/>
       </div>
       <div className="cities">
-        {offers.length ? <Main offers={offers}/> : <MainEmpty/>}
+        {offersCard.length ? <Main sortType={sortType} offersCard={offersCard}/> : <MainEmpty/>}
       </div>
     </main>
   );

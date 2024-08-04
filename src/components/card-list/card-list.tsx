@@ -1,29 +1,24 @@
-import {OffersType} from '../../types/offer';
-import {useState} from 'react';
+import {OffersCardType} from '../../types/offer';
 import Card from '../card/card';
 
-type CardListProp = {
-  offers: OffersType;
-  blockClass: string;
-  elementClass: string;
+type CardListProps = {
+  offersCard: OffersCardType;
+  className: string;
+  onOfferCardHover?: (id?: string) => void;
 }
 
-function CardList({offers, blockClass, elementClass}: CardListProp): JSX.Element {
-  const [activeCard, setActiveCard] = useState('0');
-
+function CardList({offersCard, className, onOfferCardHover}: CardListProps): JSX.Element {
   return (
     <>
-      <h3 style={{width: '100%'}}>
-        Для теста: activeCard = {activeCard}
-      </h3>
-      {offers.map((offer) => (
+      {offersCard.map((offerCard) => (
         <Card
-          key={offer.id}
-          offer={offer}
-          blockClass={blockClass}
-          elementClass={elementClass}
-          onMouseEnter = {() => setActiveCard(offer.id)}
-          onMouseLeave = {() => setActiveCard('0')}
+          key={offerCard.id}
+          offerCard={offerCard}
+          className={className}
+          {...(onOfferCardHover && {
+            onMouseEnter: () => onOfferCardHover(offerCard.id),
+            onMouseLeave: () => onOfferCardHover(),
+          })}
         />
       ))}
     </>

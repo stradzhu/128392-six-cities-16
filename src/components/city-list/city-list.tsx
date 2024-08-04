@@ -1,37 +1,26 @@
-function CityList(): JSX.Element {
+import {ALL_CITY_LIST} from '../../const';
+import {Link} from 'react-router-dom';
+import {useState} from 'react';
+
+type CityListProps = {
+  activeCity: typeof ALL_CITY_LIST[number];
+}
+
+function CityList({activeCity}: CityListProps): JSX.Element {
+  const [activeCityName, setActiveCityName] = useState(activeCity);
+
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Paris</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Cologne</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Brussels</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item tabs__item--active">
-            <span>Amsterdam</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Hamburg</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Dusseldorf</span>
-          </a>
-        </li>
+        {ALL_CITY_LIST.map((city) => (
+          <li key={city} className="locations__item">
+            <Link to="#" onClick={() => (city !== activeCityName && setActiveCityName(city))}
+              className={`locations__item-link tabs__item ${city === activeCityName ? 'tabs__item--active' : ''}`}
+            >
+              <span>{city}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );
