@@ -12,6 +12,10 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export const URL_MARKER_DEFAULT = '/img/pin.svg';
+
+export const URL_MARKER_CURRENT = '/img/pin-active.svg';
+
 export const MAX_OFFER_PHOTO = 6;
 
 export const ReviewSetting = {

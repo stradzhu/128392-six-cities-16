@@ -9,6 +9,7 @@ import {getRating, getBedroomsString, getAdultsString} from '../../utils';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {clsx} from 'clsx';
+import Map from '../../components/map/map';
 
 type OfferProps = {
   offers: OffersType;
@@ -25,6 +26,9 @@ function OfferScreen({offers, nearOfferCards, reviews, authorizationStatus}: Off
   if (!offer) {
     return <NotFoundScreen/>;
   }
+
+  const mapPoints = nearOfferCards.map(({location, id}) => ({location, id}));
+  mapPoints.push({location: offer.location, id: offer.id});
 
   return (
     <main className="page__main page__main--offer">
@@ -109,7 +113,9 @@ function OfferScreen({offers, nearOfferCards, reviews, authorizationStatus}: Off
             <Reviews reviews={reviews} authorizationStatus={authorizationStatus}/>
           </div>
         </div>
-        <section className="offer__map map"></section>
+        <section className="offer__map map">
+          <Map points={mapPoints} hoveredOfferId={offer.id}/>
+        </section>
       </section>
       <div className="container">
         <section className="near-places places">

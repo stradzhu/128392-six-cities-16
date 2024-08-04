@@ -32,3 +32,10 @@ export type OfferType = OfferTemplateType & {
 };
 
 export type OffersType = OfferType[];
+
+export type PointType = {
+  location: LocationType;
+  id: string;
+};
+
+export type PointsType = PointType[];
