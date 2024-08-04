@@ -17,8 +17,8 @@ function ReviewsForm({setReviewsData}: ReviewsFormProps): JSX.Element {
     setFormData({...formData, [name]: value});
   };
 
-  const disableSubmit = (): boolean => formData.review.length < ReviewSetting.MIN
-    || formData.review.length > ReviewSetting.MAX
+  const disableSubmit = (): boolean => formData.review.length < ReviewSetting.Min
+    || formData.review.length > ReviewSetting.Max
     || !formData.rating;
 
   const handleSubmit = (evt: SyntheticEvent) => {
@@ -81,7 +81,7 @@ function ReviewsForm({setReviewsData}: ReviewsFormProps): JSX.Element {
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewSetting.MIN} characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewSetting.Min} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={disableSubmit()}>Submit</button>
       </div>
