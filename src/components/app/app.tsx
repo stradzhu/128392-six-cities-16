@@ -3,7 +3,6 @@ import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute} from '../../const';
 import {PrivateRoute, PublicRoute} from '../access-route/access-route';
 import Layout from '../layout/layout';
-
 import MainScreen from '../../pages/main/main';
 import FavoritesScreen from '../../pages/favorites/favorites';
 import LoginScreen from '../../pages/login/login';
