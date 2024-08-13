@@ -1,16 +1,14 @@
 import {OffersCardType} from '../../types/offer';
 import CardList from '../card-list/card-list';
 import PlacesSorting from '../places-sorting/places-sorting';
-import {SortTypes} from '../../const';
 import Map from '../map/map';
 import {useState} from 'react';
 
 type MainProps = {
   offersCard: OffersCardType;
-  sortType: typeof SortTypes[keyof typeof SortTypes];
 }
 
-function Main({offersCard, sortType}: MainProps): JSX.Element {
+function Main({offersCard}: MainProps): JSX.Element {
   const [hoveredOfferId, setHoveredOfferId] = useState<string | undefined>(undefined);
 
   return (
@@ -18,7 +16,7 @@ function Main({offersCard, sortType}: MainProps): JSX.Element {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{offersCard.length} places to stay in Amsterdam</b>
-        <PlacesSorting sortType={sortType}/>
+        <PlacesSorting/>
         <div className="cities__places-list places__list tabs__content">
           <CardList offersCard={offersCard} className="cities" onOfferCardHover={setHoveredOfferId}/>
         </div>

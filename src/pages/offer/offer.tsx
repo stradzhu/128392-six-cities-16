@@ -1,26 +1,20 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {AuthorizationStatus, MAX_OFFER_PHOTO} from '../../const';
+import {MAX_OFFER_PHOTO} from '../../const';
 import CardList from '../../components/card-list/card-list';
 import Reviews from '../../components/reviews/reviews';
-import {OffersCardType, OffersType} from '../../types/offer';
-import {ReviewsType} from '../../types/review';
 import {getRating, getBedroomsString, getAdultsString} from '../../utils';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {clsx} from 'clsx';
 import Map from '../../components/map/map';
+import {useAppSelector} from '../../hooks';
 
-type OfferProps = {
-  offers: OffersType;
-  nearOfferCards: OffersCardType;
-  reviews: ReviewsType;
-  authorizationStatus: AuthorizationStatus;
-}
+function OfferScreen(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const nearOfferCards = useAppSelector((state) => state.offersCard).slice(0, 3);
 
-function OfferScreen({offers, nearOfferCards, reviews, authorizationStatus}: OfferProps): JSX.Element {
   const {id: offerId} = useParams();
-
   const offer = offers.find((item) => item.id === offerId);
 
   if (!offer) {
@@ -110,7 +104,7 @@ function OfferScreen({offers, nearOfferCards, reviews, authorizationStatus}: Off
                 </p>
               </div>
             </div>
-            <Reviews reviews={reviews} authorizationStatus={authorizationStatus}/>
+            <Reviews/>
           </div>
         </div>
         <section className="offer__map map">

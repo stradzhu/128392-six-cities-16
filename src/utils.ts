@@ -1,5 +1,5 @@
 import {ReviewsType} from './types/review';
-import {ReviewSetting} from './const';
+import {ReviewSetting, SortTypes} from './const';
 import {OffersCardType} from './types/offer';
 
 export const getRating = (rating: number): string => `${Math.round(rating) * 100 / 5}%`;
@@ -27,4 +27,21 @@ export const getOffersCardByCity = (offers: OffersCardType) => {
   });
 
   return offersCardByCity;
+};
+
+export const getSortedOffersCard = (offersCard: OffersCardType, SortType: typeof SortTypes[keyof typeof SortTypes]): OffersCardType => {
+  switch (SortType) {
+    case SortTypes.PriceUp: {
+      return offersCard.slice().sort((offerCardA, offerCardB) => offerCardB.price - offerCardA.price);
+    }
+    case SortTypes.PriceDown: {
+      return offersCard.slice().sort((offerCardA, offerCardB) => offerCardA.price - offerCardB.price);
+    }
+    case SortTypes.RatingDown: {
+      return offersCard.slice().sort((offerCardA, offerCardB) => offerCardB.rating - offerCardA.rating);
+    }
+    default: {
+      return offersCard;
+    }
+  }
 };

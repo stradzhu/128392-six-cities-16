@@ -1,12 +1,11 @@
-import {ChangeEvent, Dispatch, Fragment, SetStateAction, SyntheticEvent, useState} from 'react';
+import {ChangeEvent, Fragment, SyntheticEvent, useState} from 'react';
 import {RatingStar, ReviewSetting} from '../../const';
-import {ReviewsType, ReviewType} from '../../types/review';
+import {useAppDispatch} from '../../hooks';
+import {addReviewAction} from '../../store/action';
 
-type ReviewsFormProps = {
-  setReviewsData: Dispatch<SetStateAction<ReviewsType>>;
-}
+function ReviewsForm(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-function ReviewsForm({setReviewsData}: ReviewsFormProps): JSX.Element {
   const [formData, setFormData] = useState({
     review: '',
     rating: '0',
@@ -28,7 +27,7 @@ function ReviewsForm({setReviewsData}: ReviewsFormProps): JSX.Element {
       return false;
     }
 
-    const newReview: ReviewType = {
+    dispatch(addReviewAction({
       id: String(Math.random()),
       comment: formData.review,
       date: new Date().toISOString(),
@@ -38,15 +37,11 @@ function ReviewsForm({setReviewsData}: ReviewsFormProps): JSX.Element {
         avatarUrl: 'img/static/avatar/3.jpg',
         isPro: false
       }
-    };
+    }));
 
-    setReviewsData((reviews) => {
-      setFormData({
-        review: '',
-        rating: '0',
-      });
-
-      return [...reviews, newReview];
+    setFormData({
+      review: '',
+      rating: '0',
     });
   };
 

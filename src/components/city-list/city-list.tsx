@@ -1,21 +1,25 @@
 import {AllCityList} from '../../const';
 import {Link} from 'react-router-dom';
-import {useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {changeCityAction} from '../../store/action';
 
-type CityListProps = {
-  activeCity: typeof AllCityList[number];
-}
+function CityList(): JSX.Element {
+  const activeCity = useAppSelector((state) => state.activeCity);
+  const dispatch = useAppDispatch();
 
-function CityList({activeCity}: CityListProps): JSX.Element {
-  const [activeCityName, setActiveCityName] = useState(activeCity);
+  const handleChangeCity = (city: typeof AllCityList[number]) => {
+    if (city !== activeCity) {
+      dispatch(changeCityAction(city));
+    }
+  };
 
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {AllCityList.map((city) => (
           <li key={city} className="locations__item">
-            <Link to="#" onClick={() => (city !== activeCityName && setActiveCityName(city))}
-              className={`locations__item-link tabs__item ${city === activeCityName ? 'tabs__item--active' : ''}`}
+            <Link to="#" onClick={() => handleChangeCity(city)}
+              className={`locations__item-link tabs__item ${city === activeCity ? 'tabs__item--active' : ''}`}
             >
               <span>{city}</span>
             </Link>

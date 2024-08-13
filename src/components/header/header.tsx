@@ -1,13 +1,15 @@
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link, NavLink, useLocation} from 'react-router-dom';
 import {clsx} from 'clsx';
+import {useAppSelector} from '../../hooks';
 
 type HeaderProps = {
   favoritesCount: number;
-  authorizationStatus: AuthorizationStatus;
 }
 
-function HeaderNav({favoritesCount, authorizationStatus}: HeaderProps): JSX.Element {
+function HeaderNav({favoritesCount}: HeaderProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -35,7 +37,7 @@ function HeaderNav({favoritesCount, authorizationStatus}: HeaderProps): JSX.Elem
   );
 }
 
-function Header({favoritesCount, authorizationStatus}: HeaderProps): JSX.Element {
+function Header({favoritesCount}: HeaderProps): JSX.Element {
   const location = useLocation();
 
   // throw new Error('Test error');
@@ -50,7 +52,7 @@ function Header({favoritesCount, authorizationStatus}: HeaderProps): JSX.Element
             </NavLink>
           </div>
           {/* TODO: разобраться с ошибкой, если сравнивать так: location.pathname !== AppRoute.Login */}
-          {location.pathname !== String(AppRoute.Login) && <HeaderNav favoritesCount={favoritesCount} authorizationStatus={authorizationStatus}/>}
+          {location.pathname !== String(AppRoute.Login) && <HeaderNav favoritesCount={favoritesCount}/>}
         </div>
       </div>
     </header>

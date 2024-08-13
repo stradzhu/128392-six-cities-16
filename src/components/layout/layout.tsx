@@ -1,14 +1,12 @@
 import {NavLink, Outlet, useLocation} from 'react-router-dom';
 import Header from '../header/header';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
+import {useAppSelector} from '../../hooks';
 
-type LayoutProps = {
-  favoritesCount: number;
-  authorizationStatus: AuthorizationStatus;
-}
-
-function Layout({favoritesCount, authorizationStatus}: LayoutProps): JSX.Element {
+function Layout(): JSX.Element {
   const location = useLocation();
+  const offersCard = useAppSelector((state) => state.offersCard);
+  const favoritesCount = offersCard.filter(({isFavorite}) => isFavorite).length;
   const pageClasses = ['page'];
 
   if (location.pathname === String(AppRoute.Favorites) && !favoritesCount) {
@@ -23,7 +21,7 @@ function Layout({favoritesCount, authorizationStatus}: LayoutProps): JSX.Element
 
   return (
     <div className={pageClasses.join(' ')}>
-      <Header favoritesCount={favoritesCount} authorizationStatus={authorizationStatus} />
+      <Header favoritesCount={favoritesCount}/>
       <Outlet/>
       {location.pathname === String(AppRoute.Favorites) &&
         <footer className="footer container">
