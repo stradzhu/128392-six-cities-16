@@ -27,7 +27,7 @@ const currentCustomIcon = new Icon({
 // И в отдельный, кастомный хук не вынес, т.к. хотел, чтобы было по другому, чем в примере
 
 function Map({points, hoveredOfferId}: MapProps): JSX.Element {
-  console.log('Map', hoveredOfferId); // eslint-disable-line no-console
+  // console.log('Map', hoveredOfferId); // eslint-disable-line no-console
 
   const mapRef = useRef<HTMLDivElement>(null);
   const isRenderedMapRef = useRef<boolean>(false);
@@ -36,7 +36,7 @@ function Map({points, hoveredOfferId}: MapProps): JSX.Element {
 
   // Шаг 1. Отрендерим Leaflet карту (пока без маркеров)
   useEffect(() => {
-    console.log('Шаг 1 старт', isRenderedMapRef.current); // eslint-disable-line no-console
+    // console.log('Шаг 1 старт', isRenderedMapRef.current); // eslint-disable-line no-console
     // проверка на isRenderedRef.current нужна, чтобы в React.StrictMode
     // хук не выполнялся два раза и не было ошибки повторного рендера карты
     if (isRenderedMapRef.current || !mapRef.current) {
@@ -51,12 +51,12 @@ function Map({points, hoveredOfferId}: MapProps): JSX.Element {
 
     mapLeaflet.current.addLayer(tileLayer);
     isRenderedMapRef.current = true;
-    console.log('Шаг 1 конец'); // eslint-disable-line no-console
+    // console.log('Шаг 1 конец'); // eslint-disable-line no-console
   }, []);
 
   // Шаг 2. Нанесем все маркеры на карту и подберем нужный масштаб отображения, чтобы все маркеры вместились
   useEffect(() => {
-    console.log('Шаг 2 старт', mapLeaflet.current); // eslint-disable-line no-console
+    // console.log('Шаг 2 старт', mapLeaflet.current); // eslint-disable-line no-console
     if (!mapLeaflet.current) {
       return;
     }
@@ -76,9 +76,9 @@ function Map({points, hoveredOfferId}: MapProps): JSX.Element {
     });
 
     mapLeaflet.current.fitBounds(markersFitBounds, {padding: [20, 20]});
-    console.log('Шаг 2 конец'); // eslint-disable-line no-console
+    // console.log('Шаг 2 конец'); // eslint-disable-line no-console
     return () => {
-      console.log('Шаг 2 отмена'); // eslint-disable-line no-console
+      // console.log('Шаг 2 отмена'); // eslint-disable-line no-console
       Object.values(mapPoints.current).forEach((marker) => {
         if (mapLeaflet.current) { // чтобы обдурить Typescript
           mapLeaflet.current.removeLayer(marker);
@@ -90,7 +90,7 @@ function Map({points, hoveredOfferId}: MapProps): JSX.Element {
 
   // Шаг 3. Отметим текущий (hovered) офер другим цветом маркера
   useEffect(() => {
-    console.log('Шаг 3 старт', hoveredOfferId); // eslint-disable-line no-console
+    // console.log('Шаг 3 старт', hoveredOfferId); // eslint-disable-line no-console
 
     if (!Object.keys(mapPoints.current)) {
       return;
@@ -100,17 +100,17 @@ function Map({points, hoveredOfferId}: MapProps): JSX.Element {
       const currentIconUrl = marker.options.icon?.options.iconUrl;
       if (hoveredOfferId === id) {
         if (currentIconUrl !== currentCustomIcon.options.iconUrl) {
-          console.log('currentCustomIcon', id); // eslint-disable-line no-console
+          // console.log('currentCustomIcon', id); // eslint-disable-line no-console
           marker.setIcon(currentCustomIcon);
         }
       } else {
         if (currentIconUrl !== defaultCustomIcon.options.iconUrl) {
-          console.log('defaultCustomIcon', id); // eslint-disable-line no-console
+          // console.log('defaultCustomIcon', id); // eslint-disable-line no-console
           marker.setIcon(defaultCustomIcon);
         }
       }
     });
-    console.log('Шаг 3 конец'); // eslint-disable-line no-console
+    // console.log('Шаг 3 конец'); // eslint-disable-line no-console
   }, [hoveredOfferId]);
 
   return <div style={{height: '100%'}} ref={mapRef}/>;
