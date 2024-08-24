@@ -1,19 +1,26 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {addReviewAction, changeCityAction, changeSortTypeAction} from './action';
-import {DEFAULT_CITY, DEFAULT_SORT_TYPE} from '../const';
-import {offersCard} from '../mocks/offers-card';
+import {
+  addReviewAction,
+  changeCityAction,
+  changeSortTypeAction,
+  loadOffersCard,
+  requireAuthorization,
+  setDataLoading, setUserAuthData
+} from './action';
+import {AuthorizationStatus, DEFAULT_CITY, DEFAULT_SORT_TYPE} from '../const';
 import {offers} from '../mocks/offers';
-import {authorizationStatus} from '../mocks/authorization-status';
 import {reviews} from '../mocks/reviews';
 import {StateType} from '../types/state';
 
 const initialState: StateType = {
   activeCity: DEFAULT_CITY,
   sortType: DEFAULT_SORT_TYPE,
-  authorizationStatus,
-  offersCard,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  offersCard: [],
   offers,
-  reviews
+  reviews,
+  isDataLoading: true,
+  user: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -26,5 +33,17 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(addReviewAction, (state, action) => {
       state.reviews.push(action.payload);
+    })
+    .addCase(loadOffersCard, (state, action) => {
+      state.offersCard = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setDataLoading, (state, action) => {
+      state.isDataLoading = action.payload;
+    })
+    .addCase(setUserAuthData, (state, action) => {
+      state.user = action.payload;
     });
 });

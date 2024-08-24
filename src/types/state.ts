@@ -2,6 +2,7 @@ import {AllCityList, AuthorizationStatus, SortTypes} from '../const';
 import {OffersCardType, OffersType} from './offer';
 import {ReviewsType} from './review';
 import {store} from '../store';
+import {UserAuthType} from './user';
 
 // Можно и так:
 // export type StateType = ReturnType<typeof store.getState>;
@@ -13,6 +14,8 @@ export type StateType = {
   offersCard: OffersCardType;
   offers: OffersType;
   reviews: ReviewsType;
+  isDataLoading: boolean;
+  user: null | UserAuthType;
 };
 
 export type AppDispatch = typeof store.dispatch;
