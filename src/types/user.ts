@@ -3,3 +3,8 @@ export type UserType = {
   name: string;
   avatarUrl: string;
 };
+
+export type UserAuthType = UserType & {
+  email: string;
+  token: string;
+};

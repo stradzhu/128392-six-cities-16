@@ -1,7 +1,8 @@
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link, NavLink, useLocation} from 'react-router-dom';
 import {clsx} from 'clsx';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {logoutAction} from '../../store/api-actions';
 
 type HeaderProps = {
   favoritesCount: number;
@@ -9,15 +10,17 @@ type HeaderProps = {
 
 function HeaderNav({favoritesCount}: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
-          {authorizationStatus === AuthorizationStatus.Auth ?
+          {authorizationStatus === AuthorizationStatus.Auth && user ?
             <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
-              <div className="header__avatar-wrapper user__avatar-wrapper"/>
-              <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+              <div className="header__avatar-wrapper user__avatar-wrapper" style={{backgroundImage: `url('${user.avatarUrl}')`, borderRadius: '50%'}}/>
+              <span className="header__user-name user__name">{user.name}</span>
               <span className="header__favorite-count">{favoritesCount}</span>
             </Link>
             :
@@ -28,7 +31,11 @@ function HeaderNav({favoritesCount}: HeaderProps): JSX.Element {
         </li>
         {authorizationStatus === AuthorizationStatus.Auth &&
           <li className="header__nav-item">
-            <Link to='/' className="header__nav-link">
+            <Link onClick={(event) => {
+              event.preventDefault();
+              dispatch(logoutAction());
+            }} to='#' className="header__nav-link"
+            >
               <span className="header__signout">Sign out</span>
             </Link>
           </li>}
