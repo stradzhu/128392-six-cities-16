@@ -8,14 +8,35 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {clsx} from 'clsx';
 import Map from '../../components/map/map';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useEffect, useState} from 'react';
+import {fetchNearOffersCardAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
+import LoadingScreen from '../loading/loading';
 
 function OfferScreen(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const nearOfferCards = useAppSelector((state) => state.offersCard).slice(0, 3);
-
   const {id: offerId} = useParams();
-  const offer = offers.find((item) => item.id === offerId);
+  const dispatch = useAppDispatch();
+
+  const offer = useAppSelector((state) => state.offer);
+  const nearOfferCards = useAppSelector((state) => state.nearOffersCard);
+
+  const [isDataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    Promise.all([
+      // TODO: неудобно тем, что если офера не существует, то все равно отправляются
+      // запросы fetchReviewsAction и fetchNearOffersCardAction (можно через then переделать)
+      dispatch(fetchOfferAction(offerId!)),
+      dispatch(fetchReviewsAction(offerId!)),
+      dispatch(fetchNearOffersCardAction(offerId!))
+    ]).then(() => setDataLoaded(true));
+  }, [dispatch, offerId]);
+
+
+  if (!isDataLoaded) {
+    // TODO: лоадер показывается 2 раза. Когда идет проверка авторизации и сейчас
+    return <LoadingScreen/>;
+  }
 
   if (!offer) {
     return <NotFoundScreen/>;

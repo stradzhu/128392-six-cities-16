@@ -1,7 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 import {AllCityList, AuthorizationStatus, SortTypes} from '../const';
-import {ReviewType} from '../types/review';
-import {OffersCardType} from '../types/offer';
+import {ReviewsType, ReviewType} from '../types/review';
+import {OffersCardType, OfferType} from '../types/offer';
 import {UserAuthType} from '../types/user';
 
 export const changeCityAction = createAction<typeof AllCityList[number]>('main/changeCity');
@@ -10,10 +10,14 @@ export const changeSortTypeAction = createAction<typeof SortTypes[keyof typeof S
 
 export const addReviewAction = createAction<ReviewType>('addReview');
 
-export const loadOffersCard = createAction<OffersCardType>('data/loadOffersCard');
+export const loadOffersCardAction = createAction<OffersCardType>('data/loadOffersCard');
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+export const requireAuthorizationAction = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const setDataLoading = createAction<boolean>('data/setDataLoading');
+export const setUserAuthDataAction = createAction<UserAuthType>('data/setUserAuthData');
 
-export const setUserAuthData = createAction<UserAuthType>('data/setUserAuthData');
+export const loadOfferAction = createAction<OfferType>('data/loadOffer');
+
+export const loadNearOffersCardAction = createAction<OffersCardType>('data/nearOffersCard');
+
+export const loadReviewsAction = createAction<ReviewsType>('data/loadReviews');

@@ -1,10 +1,13 @@
-import {ChangeEvent, Fragment, SyntheticEvent, useState} from 'react';
+import {ChangeEvent, Fragment, SyntheticEvent, useRef, useState} from 'react';
 import {RatingStar, ReviewSetting} from '../../const';
+import {useParams} from 'react-router-dom';
+import {sendReviewAction} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks';
-import {addReviewAction} from '../../store/action';
 
 function ReviewsForm(): JSX.Element {
+  const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
+  const buttonSubmitRef = useRef<HTMLButtonElement | null>(null);
 
   const [formData, setFormData] = useState({
     review: '',
@@ -14,34 +17,32 @@ function ReviewsForm(): JSX.Element {
   const handleFieldChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
     setFormData({...formData, [name]: value});
-  };
+    setFormData((prevState) => {
+      const newState = {...prevState, [name]: value};
 
-  const disableSubmit = (): boolean => formData.review.length < ReviewSetting.Min
-    || formData.review.length > ReviewSetting.Max
-    || !formData.rating;
+      buttonSubmitRef.current!.disabled = newState.review.length < ReviewSetting.Min
+        || newState.review.length > ReviewSetting.Max
+        || !newState.rating;
+
+      return newState;
+    });
+  };
 
   const handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
 
-    if (disableSubmit()) {
-      return false;
-    }
-
-    dispatch(addReviewAction({
-      id: String(Math.random()),
-      comment: formData.review,
-      date: new Date().toISOString(),
-      rating: Number(formData.rating),
-      user: {
-        name: 'Dima',
-        avatarUrl: 'img/static/avatar/3.jpg',
-        isPro: false
+    dispatch(sendReviewAction({
+      offerId: offerId!,
+      body: {
+        comment: formData.review,
+        rating: Number(formData.rating)
       }
-    }));
-
-    setFormData({
-      review: '',
-      rating: '0',
+    })).then(() => {
+      setFormData({
+        review: '',
+        rating: '0',
+      });
+      buttonSubmitRef.current!.disabled = true;
     });
   };
 
@@ -78,7 +79,7 @@ function ReviewsForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewSetting.Min} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={disableSubmit()}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" ref={buttonSubmitRef} disabled>Submit</button>
       </div>
     </form>
   );

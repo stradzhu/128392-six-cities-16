@@ -1,5 +1,5 @@
 import {AllCityList, AuthorizationStatus, SortTypes} from '../const';
-import {OffersCardType, OffersType} from './offer';
+import {OffersCardType, OfferType} from './offer';
 import {ReviewsType} from './review';
 import {store} from '../store';
 import {UserAuthType} from './user';
@@ -12,9 +12,9 @@ export type StateType = {
   sortType: typeof SortTypes[keyof typeof SortTypes];
   authorizationStatus: AuthorizationStatus;
   offersCard: OffersCardType;
-  offers: OffersType;
+  offer: null | OfferType;
+  nearOffersCard: OffersCardType;
   reviews: ReviewsType;
-  isDataLoading: boolean;
   user: null | UserAuthType;
 };
 
