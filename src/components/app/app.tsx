@@ -7,9 +7,8 @@ import {router} from '../../router';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isDataLoading = useAppSelector((state) => state.isDataLoading);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
     return (
       <LoadingScreen/>
     );
