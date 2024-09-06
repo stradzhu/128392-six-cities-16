@@ -8,13 +8,13 @@ export const changeCityAction = createAction<typeof AllCityList[number]>('main/c
 
 export const changeSortTypeAction = createAction<typeof SortTypes[keyof typeof SortTypes]>('main/changeSortType');
 
-export const addReviewAction = createAction<ReviewType>('addReview');
+export const addReviewAction = createAction<ReviewType>('data/addReview');
 
 export const loadOffersCardAction = createAction<OffersCardType>('data/loadOffersCard');
 
 export const requireAuthorizationAction = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const setUserAuthDataAction = createAction<UserAuthType>('data/setUserAuthData');
+export const setUserAuthDataAction = createAction<UserAuthType>('user/setUserAuthData');
 
 export const loadOfferAction = createAction<OfferType>('data/loadOffer');
 
