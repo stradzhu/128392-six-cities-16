@@ -75,3 +75,9 @@ export const RatingStar = [
     title: 'terribly',
   },
 ] as const;
+
+export const ReducerName = {
+  Data: 'DATA',
+  User: 'USER',
+  Main: 'MAIN'
+} as const;

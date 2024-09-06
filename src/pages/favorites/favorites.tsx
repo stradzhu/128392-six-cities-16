@@ -2,9 +2,10 @@ import {Helmet} from 'react-helmet-async';
 import Favorites from '../../components/favorites/favorites';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import {useAppSelector} from '../../hooks';
+import {getOffersCardSelector} from '../../store/data-process/data-process.selectors.ts';
 
 function FavoritesScreen(): JSX.Element {
-  const offersCard = useAppSelector((state) => state.offersCard);
+  const offersCard = useAppSelector(getOffersCardSelector);
   const favorites = offersCard.filter(({isFavorite}) => isFavorite);
 
   return (

@@ -2,10 +2,11 @@ import {NavLink, Outlet, useLocation} from 'react-router-dom';
 import Header from '../header/header';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
+import {getOffersCardSelector} from '../../store/data-process/data-process.selectors.ts';
 
 function Layout(): JSX.Element {
   const location = useLocation();
-  const offersCard = useAppSelector((state) => state.offersCard);
+  const offersCard = useAppSelector(getOffersCardSelector);
   const favoritesCount = offersCard.filter(({isFavorite}) => isFavorite).length;
   const pageClasses = ['page'];
 
