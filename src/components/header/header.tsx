@@ -1,9 +1,8 @@
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link, NavLink, useLocation} from 'react-router-dom';
 import {clsx} from 'clsx';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {logoutAction} from '../../store/thunk/user.ts';
-import {userSelectors} from '../../store/slice/user.ts';
+import {useActionCreators, useAppSelector} from '../../hooks';
+import {userActions, userSelectors} from '../../store/slice/user.ts';
 
 type HeaderProps = {
   favoritesCount: number;
@@ -12,7 +11,7 @@ type HeaderProps = {
 function HeaderNav({favoritesCount}: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector(userSelectors.authorizationStatus);
   const user = useAppSelector(userSelectors.user);
-  const dispatch = useAppDispatch();
+  const {logoutAction} = useActionCreators(userActions);
 
   return (
     <nav className="header__nav">
@@ -34,7 +33,7 @@ function HeaderNav({favoritesCount}: HeaderProps): JSX.Element {
           <li className="header__nav-item">
             <Link onClick={(event) => {
               event.preventDefault();
-              dispatch(logoutAction());
+              logoutAction();
             }} to='#' className="header__nav-link"
             >
               <span className="header__signout">Sign out</span>

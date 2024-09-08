@@ -1,13 +1,13 @@
 import {ChangeEvent, Fragment, SyntheticEvent, useRef, useState} from 'react';
 import {RatingStar, ReviewSetting} from '../../const';
 import {useParams} from 'react-router-dom';
-import {sendReviewAction} from '../../store/thunk/data.ts';
-import {useAppDispatch} from '../../hooks';
+import {useActionCreators} from '../../hooks';
+import {dataActions} from '../../store/slice/data.ts';
 
 function ReviewsForm(): JSX.Element {
   const {id: offerId} = useParams();
-  const dispatch = useAppDispatch();
   const buttonSubmitRef = useRef<HTMLButtonElement | null>(null);
+  const {sendReviewAction} = useActionCreators(dataActions);
 
   const [formData, setFormData] = useState({
     review: '',
@@ -32,13 +32,13 @@ function ReviewsForm(): JSX.Element {
   const handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
 
-    dispatch(sendReviewAction({
+    sendReviewAction({
       offerId: offerId!,
       body: {
         comment: formData.review,
         rating: Number(formData.rating)
       }
-    }))
+    })
       .unwrap()
       .then(() => {
         setFormData({

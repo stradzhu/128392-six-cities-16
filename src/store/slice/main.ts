@@ -24,6 +24,6 @@ export const mainSlice = createSlice({
   }
 });
 
-export const mainActions = mainSlice.actions;
-
 export const mainSelectors = mainSlice.selectors;
+
+export const mainActions = mainSlice.actions;

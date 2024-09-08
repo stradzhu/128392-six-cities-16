@@ -49,3 +49,5 @@ export const dataSlice = createSlice({
 });
 
 export const dataSelectors = dataSlice.selectors;
+
+export const dataActions = {...dataSlice.actions, fetchOffersCardAction, fetchOfferAction, fetchNearOffersCardAction, fetchReviewsAction, sendReviewAction};

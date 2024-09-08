@@ -8,15 +8,14 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {clsx} from 'clsx';
 import Map from '../../components/map/map';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useActionCreators, useAppSelector} from '../../hooks';
 import {useEffect, useState} from 'react';
-import {fetchNearOffersCardAction, fetchOfferAction, fetchReviewsAction} from '../../store/thunk/data.ts';
 import LoadingScreen from '../loading/loading';
-import {dataSelectors} from '../../store/slice/data.ts';
+import {dataActions, dataSelectors} from '../../store/slice/data.ts';
 
 function OfferScreen(): JSX.Element {
   const {id: offerId} = useParams();
-  const dispatch = useAppDispatch();
+  const {fetchOfferAction, fetchReviewsAction, fetchNearOffersCardAction} = useActionCreators(dataActions);
 
   const offer = useAppSelector(dataSelectors.offer);
   const nearOfferCards = useAppSelector(dataSelectors.nearOffersCard);
@@ -27,11 +26,11 @@ function OfferScreen(): JSX.Element {
     Promise.all([
       // TODO: неудобно тем, что если офера не существует, то все равно отправляются
       // запросы fetchReviewsAction и fetchNearOffersCardAction (можно через then переделать)
-      dispatch(fetchOfferAction(offerId!)),
-      dispatch(fetchReviewsAction(offerId!)),
-      dispatch(fetchNearOffersCardAction(offerId!))
+      fetchOfferAction(offerId!),
+      fetchReviewsAction(offerId!),
+      fetchNearOffersCardAction(offerId!)
     ]).then(() => setDataLoaded(true));
-  }, [dispatch, offerId]);
+  }, [fetchOfferAction, fetchReviewsAction, fetchNearOffersCardAction, offerId]);
 
 
   if (!isDataLoaded) {

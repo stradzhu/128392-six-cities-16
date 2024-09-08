@@ -1,19 +1,19 @@
 import {useState} from 'react';
 import {SortTypes} from '../../const';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useActionCreators, useAppSelector} from '../../hooks';
 import {mainActions, mainSelectors} from '../../store/slice/main.ts';
 
 function PlacesSorting(): JSX.Element {
   const [isOpenSort, setOpenSort] = useState(false);
   const sortType = useAppSelector(mainSelectors.sortType);
-  const dispatch = useAppDispatch();
+  const {changeSortTypeAction} = useActionCreators(mainActions);
 
   const handleToggleSort = () => {
     setOpenSort(!isOpenSort);
   };
 
   const handleClickItemSort = (type: typeof SortTypes[keyof typeof SortTypes]) => {
-    dispatch(mainActions.changeSortTypeAction(type));
+    changeSortTypeAction(type);
     setOpenSort(!isOpenSort);
   };
 

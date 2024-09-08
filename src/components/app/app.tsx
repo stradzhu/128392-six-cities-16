@@ -1,22 +1,23 @@
 import {RouterProvider} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {useAppDispatch} from '../../hooks';
+import {useActionCreators} from '../../hooks';
 import LoadingScreen from '../../pages/loading/loading';
 import {router} from '../../router.tsx';
-import {fetchOffersCardAction} from '../../store/thunk/data.ts';
-import {checkAuthAction} from '../../store/thunk/user.ts';
 import {useEffect, useState} from 'react';
+import {userActions} from '../../store/slice/user.ts';
+import {dataActions} from '../../store/slice/data.ts';
 
 function App(): JSX.Element {
-  const dispatch = useAppDispatch();
+  const {checkAuthAction} = useActionCreators(userActions);
+  const {fetchOffersCardAction} = useActionCreators(dataActions);
   const [isDataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     Promise.all([
-      dispatch(checkAuthAction()),
-      dispatch(fetchOffersCardAction())
+      checkAuthAction(),
+      fetchOffersCardAction()
     ]).then(() => setDataLoaded(true));
-  }, [dispatch]);
+  }, [checkAuthAction, fetchOffersCardAction]);
 
   if (!isDataLoaded) {
     return <LoadingScreen/>;
