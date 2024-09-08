@@ -3,7 +3,8 @@ import {HelmetProvider} from 'react-helmet-async';
 import {useAppDispatch} from '../../hooks';
 import LoadingScreen from '../../pages/loading/loading';
 import {router} from '../../router.tsx';
-import {checkAuthAction, fetchOffersCardAction} from '../../store/api-actions.ts';
+import {fetchOffersCardAction} from '../../store/thunk/data.ts';
+import {checkAuthAction} from '../../store/thunk/user.ts';
 import {useEffect, useState} from 'react';
 
 function App(): JSX.Element {

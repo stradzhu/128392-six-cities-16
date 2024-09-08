@@ -1,7 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import {FormEvent, useRef} from 'react';
 import {useAppDispatch} from '../../hooks';
-import {loginAction} from '../../store/api-actions';
+import {loginAction} from '../../store/thunk/user.ts';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);

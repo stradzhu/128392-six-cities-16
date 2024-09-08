@@ -1,7 +1,7 @@
 import {ChangeEvent, Fragment, SyntheticEvent, useRef, useState} from 'react';
 import {RatingStar, ReviewSetting} from '../../const';
 import {useParams} from 'react-router-dom';
-import {sendReviewAction} from '../../store/api-actions';
+import {sendReviewAction} from '../../store/thunk/data.ts';
 import {useAppDispatch} from '../../hooks';
 
 function ReviewsForm(): JSX.Element {

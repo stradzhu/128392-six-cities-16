@@ -7,7 +7,7 @@ import {
   fetchOffersCardAction,
   fetchReviewsAction,
   sendReviewAction
-} from '../api-actions.ts';
+} from '../thunk/data.ts';
 import {ReviewsType, ReviewType} from '../../types/review.ts';
 import {OffersCardType, OfferType} from '../../types/offer.ts';
 

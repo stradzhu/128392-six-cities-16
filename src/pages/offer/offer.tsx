@@ -10,7 +10,7 @@ import {clsx} from 'clsx';
 import Map from '../../components/map/map';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect, useState} from 'react';
-import {fetchNearOffersCardAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
+import {fetchNearOffersCardAction, fetchOfferAction, fetchReviewsAction} from '../../store/thunk/data.ts';
 import LoadingScreen from '../loading/loading';
 import {dataSelectors} from '../../store/slice/data.ts';
 

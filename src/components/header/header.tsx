@@ -2,7 +2,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link, NavLink, useLocation} from 'react-router-dom';
 import {clsx} from 'clsx';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {logoutAction} from '../../store/api-actions';
+import {logoutAction} from '../../store/thunk/user.ts';
 import {userSelectors} from '../../store/slice/user.ts';
 
 type HeaderProps = {

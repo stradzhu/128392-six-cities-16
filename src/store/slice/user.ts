@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {UserProcessType} from '../../types/state.ts';
 import {AppRoute, AuthorizationStatus, ReducerName} from '../../const.ts';
-import {checkAuthAction, loginAction, logoutAction} from '../api-actions.ts';
+import {checkAuthAction, loginAction, logoutAction} from '../thunk/user.ts';
 import {UserAuthType} from '../../types/user.ts';
 import {router} from '../../router.tsx';
 import {dropToken, saveToken} from '../../services/token.ts';
