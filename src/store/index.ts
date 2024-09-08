@@ -1,8 +1,17 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {createAPI} from '../services/api';
-import {rootReducer} from './root-reducer.ts';
+import {ReducerName} from '../const.ts';
+import {dataSlice} from './slice/data.ts';
+import {mainSlice} from './slice/main.ts';
+import {userSlice} from './slice/user.ts';
 
-export const api = createAPI();
+const rootReducer = combineReducers({
+  [ReducerName.Data]: dataSlice.reducer,
+  [ReducerName.Main]: mainSlice.reducer,
+  [ReducerName.User]: userSlice.reducer,
+});
+
+const api = createAPI();
 
 export const store = configureStore({
   reducer: rootReducer,

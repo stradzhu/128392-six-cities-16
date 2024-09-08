@@ -1,16 +1,15 @@
 import {AllCityList} from '../../const';
 import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getActiveCitySelector} from '../../store/main-process/main-process.selectors.ts';
-import {changeCityAction} from '../../store/main-process/main-process.slice.ts';
+import {mainActions, mainSelectors} from '../../store/slice/main.ts';
 
 function CityList(): JSX.Element {
-  const activeCity = useAppSelector(getActiveCitySelector);
+  const activeCity = useAppSelector(mainSelectors.activeCity);
   const dispatch = useAppDispatch();
 
   const handleChangeCity = (city: typeof AllCityList[number]) => {
     if (city !== activeCity) {
-      dispatch(changeCityAction(city));
+      dispatch(mainActions.changeCityAction(city));
     }
   };
 

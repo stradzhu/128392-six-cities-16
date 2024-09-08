@@ -1,18 +1,24 @@
 import {RouterProvider} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch} from '../../hooks';
 import LoadingScreen from '../../pages/loading/loading';
 import {router} from '../../router.tsx';
-import {getAuthorizationStatusSelector} from '../../store/user-process/user-process.selectors.ts';
+import {checkAuthAction, fetchOffersCardAction} from '../../store/api-actions.ts';
+import {useEffect, useState} from 'react';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatusSelector);
+  const dispatch = useAppDispatch();
+  const [isDataLoaded, setDataLoaded] = useState(false);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown) {
-    return (
-      <LoadingScreen/>
-    );
+  useEffect(() => {
+    Promise.all([
+      dispatch(checkAuthAction()),
+      dispatch(fetchOffersCardAction())
+    ]).then(() => setDataLoaded(true));
+  }, [dispatch]);
+
+  if (!isDataLoaded) {
+    return <LoadingScreen/>;
   }
 
   return (

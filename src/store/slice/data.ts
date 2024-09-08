@@ -18,7 +18,7 @@ const initialState: DataProcessType = {
   reviews: [],
 };
 
-export const dataProcessSlice = createSlice({
+export const dataSlice = createSlice({
   name: ReducerName.Data,
   initialState,
   reducers: {},
@@ -39,5 +39,13 @@ export const dataProcessSlice = createSlice({
       .addCase(sendReviewAction.fulfilled, (state, action: PayloadAction<ReviewType>) => {
         state.reviews.push(action.payload);
       });
+  },
+  selectors: {
+    offersCard: (state) => state.offersCard,
+    offer: (state) => state.offer,
+    nearOffersCard: (state) => state.nearOffersCard,
+    reviews: (state) => state.reviews
   }
 });
+
+export const dataSelectors = dataSlice.selectors;

@@ -20,6 +20,7 @@ function ReviewsForm(): JSX.Element {
     setFormData((prevState) => {
       const newState = {...prevState, [name]: value};
 
+      // TODO: уже сомневаюсь, что это была хорошая идея из стейта перенести в реф
       buttonSubmitRef.current!.disabled = newState.review.length < ReviewSetting.Min
         || newState.review.length > ReviewSetting.Max
         || !newState.rating;
@@ -37,13 +38,14 @@ function ReviewsForm(): JSX.Element {
         comment: formData.review,
         rating: Number(formData.rating)
       }
-    })).then(() => {
-      setFormData({
-        review: '',
-        rating: '0',
+    }))
+      .unwrap()
+      .then(() => {
+        setFormData({
+          review: '',
+          rating: '0',
+        });
       });
-      buttonSubmitRef.current!.disabled = true;
-    });
   };
 
   return (

@@ -11,7 +11,7 @@ const initialState: UserProcessType = {
   user: null
 };
 
-export const userProcessSlice = createSlice({
+export const userSlice = createSlice({
   name: ReducerName.User,
   initialState,
   reducers: {},
@@ -38,5 +38,11 @@ export const userProcessSlice = createSlice({
         state.user = null;
         dropToken();
       });
+  },
+  selectors: {
+    authorizationStatus: (state) => state.authorizationStatus,
+    user: (state) => state.user
   }
 });
+
+export const userSelectors = userSlice.selectors;

@@ -7,7 +7,7 @@ const initialState: MainProcessType = {
   sortType: DEFAULT_SORT_TYPE,
 };
 
-export const mainProcessSlice = createSlice({
+export const mainSlice = createSlice({
   name: ReducerName.Main,
   initialState,
   reducers: {
@@ -17,7 +17,13 @@ export const mainProcessSlice = createSlice({
     changeSortTypeAction: (state, action: PayloadAction<typeof SortTypes[keyof typeof SortTypes]>) => {
       state.sortType = action.payload;
     }
+  },
+  selectors: {
+    activeCity:(state) => state.activeCity,
+    sortType: (state) => state.sortType
   }
 });
 
-export const {changeCityAction, changeSortTypeAction} = mainProcessSlice.actions;
+export const mainActions = mainSlice.actions;
+
+export const mainSelectors = mainSlice.selectors;

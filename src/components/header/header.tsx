@@ -3,15 +3,15 @@ import {Link, NavLink, useLocation} from 'react-router-dom';
 import {clsx} from 'clsx';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
-import {getAuthorizationStatusSelector, getUserSelector} from '../../store/user-process/user-process.selectors.ts';
+import {userSelectors} from '../../store/slice/user.ts';
 
 type HeaderProps = {
   favoritesCount: number;
 }
 
 function HeaderNav({favoritesCount}: HeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatusSelector);
-  const user = useAppSelector(getUserSelector);
+  const authorizationStatus = useAppSelector(userSelectors.authorizationStatus);
+  const user = useAppSelector(userSelectors.user);
   const dispatch = useAppDispatch();
 
   return (

@@ -4,13 +4,13 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import CityList from '../../components/city-list/city-list';
 import {getSortedOffersCard} from '../../utils';
 import {useAppSelector} from '../../hooks';
-import {getActiveCitySelector, getSortTypeSelector} from '../../store/main-process/main-process.selectors.ts';
-import {getOffersCardSelector} from '../../store/data-process/data-process.selectors.ts';
+import {mainSelectors} from '../../store/slice/main.ts';
+import {dataSelectors} from '../../store/slice/data.ts';
 
 function MainScreen(): JSX.Element {
-  const activeCity = useAppSelector(getActiveCitySelector);
-  const sortType = useAppSelector(getSortTypeSelector);
-  const offersCard = useAppSelector(getOffersCardSelector);
+  const activeCity = useAppSelector(mainSelectors.activeCity);
+  const sortType = useAppSelector(mainSelectors.sortType);
+  const offersCard = useAppSelector(dataSelectors.offersCard);
 
   const filteredOffersCard = offersCard.filter(({city: {name}}) => name === activeCity);
   const sortedOffersCard = getSortedOffersCard(filteredOffersCard, sortType);

@@ -1,12 +1,11 @@
 import {useState} from 'react';
 import {SortTypes} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getSortTypeSelector} from '../../store/main-process/main-process.selectors.ts';
-import { changeSortTypeAction } from '../../store/main-process/main-process.slice.ts';
+import {mainActions, mainSelectors} from '../../store/slice/main.ts';
 
 function PlacesSorting(): JSX.Element {
   const [isOpenSort, setOpenSort] = useState(false);
-  const sortType = useAppSelector(getSortTypeSelector);
+  const sortType = useAppSelector(mainSelectors.sortType);
   const dispatch = useAppDispatch();
 
   const handleToggleSort = () => {
@@ -14,7 +13,7 @@ function PlacesSorting(): JSX.Element {
   };
 
   const handleClickItemSort = (type: typeof SortTypes[keyof typeof SortTypes]) => {
-    dispatch(changeSortTypeAction(type));
+    dispatch(mainActions.changeSortTypeAction(type));
     setOpenSort(!isOpenSort);
   };
 

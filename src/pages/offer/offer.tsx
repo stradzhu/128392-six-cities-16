@@ -12,14 +12,14 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect, useState} from 'react';
 import {fetchNearOffersCardAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import LoadingScreen from '../loading/loading';
-import {getNearOffersCardSelector, getOfferSelector} from '../../store/data-process/data-process.selectors.ts';
+import {dataSelectors} from '../../store/slice/data.ts';
 
 function OfferScreen(): JSX.Element {
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
 
-  const offer = useAppSelector(getOfferSelector);
-  const nearOfferCards = useAppSelector(getNearOffersCardSelector);
+  const offer = useAppSelector(dataSelectors.offer);
+  const nearOfferCards = useAppSelector(dataSelectors.nearOffersCard);
 
   const [isDataLoaded, setDataLoaded] = useState(false);
 
