@@ -5,7 +5,7 @@ import {AxiosInstance} from 'axios';
 import {APIRoute} from '../../const.ts';
 import {ReviewNewType, ReviewsType, ReviewType} from '../../types/review.ts';
 
-export const fetchOffersCardAction = createAsyncThunk<OffersCardType, undefined, {
+export const fetchOffersCardAction = createAsyncThunk<OffersCardType, void, {
   dispatch: AppDispatch;
   state: StateType;
   extra: AxiosInstance;

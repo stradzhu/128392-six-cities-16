@@ -5,7 +5,7 @@ import {AxiosInstance} from 'axios';
 import {APIRoute} from '../../const.ts';
 import {AuthData} from '../../types/auth-data.ts';
 
-export const checkAuthAction = createAsyncThunk<UserAuthType, undefined, {
+export const checkAuthAction = createAsyncThunk<UserAuthType, void, {
   dispatch: AppDispatch;
   state: StateType;
   extra: AxiosInstance;
@@ -29,7 +29,7 @@ export const loginAction = createAsyncThunk<UserAuthType, AuthData, {
   }
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, {
+export const logoutAction = createAsyncThunk<void, void, {
   dispatch: AppDispatch;
   state: StateType;
   extra: AxiosInstance;
