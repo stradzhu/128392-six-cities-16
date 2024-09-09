@@ -1,10 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {UserProcessType} from '../../types/state.ts';
-import {AppRoute, AuthorizationStatus, ReducerName} from '../../const.ts';
+import {AuthorizationStatus, ReducerName} from '../../const.ts';
 import {checkAuthAction, loginAction, logoutAction} from '../thunk/user.ts';
 import {UserAuthType} from '../../types/user.ts';
-import {router} from '../../router.tsx';
-import {dropToken, saveToken} from '../../services/token.ts';
 
 const initialState: UserProcessType = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -27,8 +25,6 @@ export const userSlice = createSlice({
       .addCase(loginAction.fulfilled, (state, action: PayloadAction<UserAuthType>) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.user = action.payload;
-        saveToken(action.payload.token);
-        router.navigate(AppRoute.Main);
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
@@ -36,7 +32,6 @@ export const userSlice = createSlice({
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.user = null;
-        dropToken();
       });
   },
   selectors: {
