@@ -6,18 +6,21 @@ import {router} from '../../router.tsx';
 import {useEffect, useState} from 'react';
 import {userActions} from '../../store/slice/user.ts';
 import {dataActions} from '../../store/slice/data.ts';
+import './../../style.css';
 
 function App(): JSX.Element {
   const {checkAuthAction} = useActionCreators(userActions);
-  const {fetchOffersCardAction} = useActionCreators(dataActions);
+  const {fetchOffersCardAction, fetchFavoritesOffersCardAction} = useActionCreators(dataActions);
   const [isDataLoaded, setDataLoaded] = useState(false);
 
+  // TODO: нужно предусмотреть, что делать, если данные не загрузятся
   useEffect(() => {
     Promise.all([
       checkAuthAction(),
-      fetchOffersCardAction()
+      fetchOffersCardAction(),
+      fetchFavoritesOffersCardAction()
     ]).then(() => setDataLoaded(true));
-  }, [checkAuthAction, fetchOffersCardAction]);
+  }, [checkAuthAction, fetchOffersCardAction, fetchFavoritesOffersCardAction]);
 
   if (!isDataLoaded) {
     return <LoadingScreen/>;

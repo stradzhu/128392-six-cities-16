@@ -45,3 +45,6 @@ export const getSortedOffersCard = (offersCard: OffersCardType, SortType: typeof
     }
   }
 };
+
+// Функция для замедления запросов, чтобы лучше отладить приложение
+export const sleep = (ms = 2000): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));

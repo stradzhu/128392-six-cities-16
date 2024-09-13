@@ -71,7 +71,7 @@ function OfferScreen(): JSX.Element {
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <FavoriteButton className="offer" isFavorite={offer.isFavorite}/>
+              <FavoriteButton className="offer" isFavorite={offer.isFavorite} offerId={offer.id}/>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">

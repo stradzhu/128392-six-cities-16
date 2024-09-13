@@ -6,16 +6,19 @@ import {
   fetchOfferAction,
   fetchOffersCardAction,
   fetchReviewsAction,
-  sendReviewAction
+  sendReviewAction,
+  fetchFavoritesOffersCardAction,
+  changeFavoriteOfferCardAction
 } from '../thunk/data.ts';
 import {ReviewsType, ReviewType} from '../../types/review.ts';
-import {OffersCardType, OfferType} from '../../types/offer.ts';
+import {OfferCardType, OffersCardType, OfferType} from '../../types/offer.ts';
 
 const initialState: DataProcessType = {
   offersCard: [],
   offer: null,
   nearOffersCard: [],
   reviews: [],
+  favorites: [],
 };
 
 export const dataSlice = createSlice({
@@ -38,16 +41,47 @@ export const dataSlice = createSlice({
       })
       .addCase(sendReviewAction.fulfilled, (state, action: PayloadAction<ReviewType>) => {
         state.reviews.push(action.payload);
+      })
+      .addCase(fetchFavoritesOffersCardAction.fulfilled, (state, action: PayloadAction<OffersCardType>) => {
+        state.favorites = action.payload;
+      })
+      .addCase(changeFavoriteOfferCardAction.fulfilled, (state, action: PayloadAction<OfferCardType>) => {
+        state.offersCard.map((offer) => {
+          if (offer.id === action.payload.id) {
+            offer.isFavorite = action.payload.isFavorite;
+          }
+          return offer;
+        });
+
+        if (state.offer && state.offer.id === action.payload.id) {
+          state.offer.isFavorite = action.payload.isFavorite;
+        }
+
+        if (action.payload.isFavorite) {
+          state.favorites.push(action.payload);
+        } else {
+          state.favorites = state.favorites.filter((offerCard) => offerCard.id !== action.payload.id);
+        }
       });
   },
   selectors: {
     offersCard: (state) => state.offersCard,
     offer: (state) => state.offer,
     nearOffersCard: (state) => state.nearOffersCard,
-    reviews: (state) => state.reviews
+    reviews: (state) => state.reviews,
+    favorites: (state) => state.favorites,
   }
 });
 
 export const dataSelectors = dataSlice.selectors;
 
-export const dataActions = {...dataSlice.actions, fetchOffersCardAction, fetchOfferAction, fetchNearOffersCardAction, fetchReviewsAction, sendReviewAction};
+export const dataActions = {
+  ...dataSlice.actions,
+  fetchOffersCardAction,
+  fetchOfferAction,
+  fetchNearOffersCardAction,
+  fetchReviewsAction,
+  sendReviewAction,
+  fetchFavoritesOffersCardAction,
+  changeFavoriteOfferCardAction
+};

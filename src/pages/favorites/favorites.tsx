@@ -5,8 +5,7 @@ import {useAppSelector} from '../../hooks';
 import {dataSelectors} from '../../store/slice/data.ts';
 
 function FavoritesScreen(): JSX.Element {
-  const offersCard = useAppSelector(dataSelectors.offersCard);
-  const favorites = offersCard.filter(({isFavorite}) => isFavorite);
+  const favorites = useAppSelector(dataSelectors.favorites);
 
   return (
     <main className={`page__main page__main--favorites ${favorites.length ? '' : 'page__main--favorites-empty'}`}>

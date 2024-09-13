@@ -19,6 +19,7 @@ export type DataProcessType = {
   offer: null | OfferType;
   nearOffersCard: OffersCardType;
   reviews: ReviewsType;
+  favorites: OffersCardType;
 }
 
 export type StateType = ReturnType<typeof store.getState>;

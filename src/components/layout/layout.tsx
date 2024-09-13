@@ -6,8 +6,8 @@ import {dataSelectors} from '../../store/slice/data.ts';
 
 function Layout(): JSX.Element {
   const location = useLocation();
-  const offersCard = useAppSelector(dataSelectors.offersCard);
-  const favoritesCount = offersCard.filter(({isFavorite}) => isFavorite).length;
+  const favoritesCount = useAppSelector(dataSelectors.favorites).length;
+
   const pageClasses = ['page'];
 
   if (location.pathname === String(AppRoute.Favorites) && !favoritesCount) {
