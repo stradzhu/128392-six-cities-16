@@ -25,7 +25,7 @@ function MainScreen(): JSX.Element {
         <CityList/>
       </div>
       <div className="cities">
-        {sortedOffersCard.length ? <Main offersCard={sortedOffersCard}/> : <MainEmpty/>}
+        {sortedOffersCard.length ? <Main offersCard={sortedOffersCard}/> : <MainEmpty city={activeCity}/>}
       </div>
     </main>
   );
