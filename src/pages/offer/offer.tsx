@@ -8,17 +8,17 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {clsx} from 'clsx';
 import Map from '../../components/map/map';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useActionCreators, useAppSelector} from '../../hooks';
 import {useEffect, useState} from 'react';
-import {fetchNearOffersCardAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import LoadingScreen from '../loading/loading';
+import {dataActions, dataSelectors} from '../../store/slice/data.ts';
 
 function OfferScreen(): JSX.Element {
   const {id: offerId} = useParams();
-  const dispatch = useAppDispatch();
+  const {fetchOfferAction, fetchReviewsAction, fetchNearOffersCardAction} = useActionCreators(dataActions);
 
-  const offer = useAppSelector((state) => state.offer);
-  const nearOfferCards = useAppSelector((state) => state.nearOffersCard);
+  const offer = useAppSelector(dataSelectors.offer);
+  const nearOfferCards = useAppSelector(dataSelectors.nearOffersCard);
 
   const [isDataLoaded, setDataLoaded] = useState(false);
 
@@ -26,11 +26,11 @@ function OfferScreen(): JSX.Element {
     Promise.all([
       // TODO: неудобно тем, что если офера не существует, то все равно отправляются
       // запросы fetchReviewsAction и fetchNearOffersCardAction (можно через then переделать)
-      dispatch(fetchOfferAction(offerId!)),
-      dispatch(fetchReviewsAction(offerId!)),
-      dispatch(fetchNearOffersCardAction(offerId!))
+      fetchOfferAction(offerId!),
+      fetchReviewsAction(offerId!),
+      fetchNearOffersCardAction(offerId!)
     ]).then(() => setDataLoaded(true));
-  }, [dispatch, offerId]);
+  }, [fetchOfferAction, fetchReviewsAction, fetchNearOffersCardAction, offerId]);
 
 
   if (!isDataLoaded) {
@@ -71,7 +71,7 @@ function OfferScreen(): JSX.Element {
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <FavoriteButton className="offer" isFavorite={offer.isFavorite}/>
+              <FavoriteButton className="offer" isFavorite={offer.isFavorite} offerId={offer.id}/>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">

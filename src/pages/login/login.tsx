@@ -1,22 +1,22 @@
 import {Helmet} from 'react-helmet-async';
 import {FormEvent, useRef} from 'react';
-import {useAppDispatch} from '../../hooks';
-import {loginAction} from '../../store/api-actions';
+import {useActionCreators} from '../../hooks';
+import {userActions} from '../../store/slice/user.ts';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const dispatch = useAppDispatch();
+  const {loginAction} = useActionCreators(userActions);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
+      loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
-      }));
+      });
     }
   };
 

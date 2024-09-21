@@ -1,19 +1,19 @@
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import {SortTypes} from '../../const';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeSortTypeAction} from '../../store/action';
+import {useActionCreators, useAppSelector} from '../../hooks';
+import {mainActions, mainSelectors} from '../../store/slice/main.ts';
 
 function PlacesSorting(): JSX.Element {
   const [isOpenSort, setOpenSort] = useState(false);
-  const sortType = useAppSelector((state) => state.sortType);
-  const dispatch = useAppDispatch();
+  const sortType = useAppSelector(mainSelectors.sortType);
+  const {changeSortTypeAction} = useActionCreators(mainActions);
 
   const handleToggleSort = () => {
     setOpenSort(!isOpenSort);
   };
 
   const handleClickItemSort = (type: typeof SortTypes[keyof typeof SortTypes]) => {
-    dispatch(changeSortTypeAction(type));
+    changeSortTypeAction(type);
     setOpenSort(!isOpenSort);
   };
 
@@ -39,4 +39,6 @@ function PlacesSorting(): JSX.Element {
   );
 }
 
-export default PlacesSorting;
+const PlacesSortingMemo = memo(PlacesSorting);
+
+export default PlacesSortingMemo;

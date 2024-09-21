@@ -4,14 +4,17 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import CityList from '../../components/city-list/city-list';
 import {getSortedOffersCard} from '../../utils';
 import {useAppSelector} from '../../hooks';
+import {mainSelectors} from '../../store/slice/main.ts';
+import {dataSelectors} from '../../store/slice/data.ts';
+import {useMemo} from 'react';
 
 function MainScreen(): JSX.Element {
-  const activeCity = useAppSelector((state) => state.activeCity);
-  const sortType = useAppSelector((state) => state.sortType);
-  const offersCard = useAppSelector((state) => state.offersCard);
+  const activeCity = useAppSelector(mainSelectors.activeCity);
+  const sortType = useAppSelector(mainSelectors.sortType);
+  const offersCard = useAppSelector(dataSelectors.offersCard);
 
-  const filteredOffersCard = offersCard.filter(({city: {name}}) => name === activeCity);
-  const sortedOffersCard = getSortedOffersCard(filteredOffersCard, sortType);
+  const filteredOffersCard = useMemo(() => offersCard.filter(({city: {name}}) => name === activeCity), [offersCard, activeCity]);
+  const sortedOffersCard = useMemo(() => getSortedOffersCard(filteredOffersCard, sortType), [filteredOffersCard, sortType]);
 
   return (
     <main className={`page__main page__main--index ${offersCard.length ? '' : 'page__main--index-empty'}`}>
@@ -23,7 +26,7 @@ function MainScreen(): JSX.Element {
         <CityList/>
       </div>
       <div className="cities">
-        {sortedOffersCard.length ? <Main offersCard={sortedOffersCard}/> : <MainEmpty/>}
+        {sortedOffersCard.length ? <Main offersCard={sortedOffersCard}/> : <MainEmpty city={activeCity}/>}
       </div>
     </main>
   );

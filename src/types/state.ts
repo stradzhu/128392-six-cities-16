@@ -4,18 +4,24 @@ import {ReviewsType} from './review';
 import {store} from '../store';
 import {UserAuthType} from './user';
 
-// Можно и так:
-// export type StateType = ReturnType<typeof store.getState>;
-
-export type StateType = {
+export type MainProcessType = {
   activeCity: typeof AllCityList[number];
   sortType: typeof SortTypes[keyof typeof SortTypes];
+}
+
+export type UserProcessType = {
   authorizationStatus: AuthorizationStatus;
+  user: null | UserAuthType;
+}
+
+export type DataProcessType = {
   offersCard: OffersCardType;
   offer: null | OfferType;
   nearOffersCard: OffersCardType;
   reviews: ReviewsType;
-  user: null | UserAuthType;
-};
+  favorites: OffersCardType;
+}
+
+export type StateType = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;

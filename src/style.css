@@ -1,0 +1,9 @@
+.place-card__bookmark-button,
+.offer__bookmark-button {
+  transition: transform 0.3s linear;
+}
+
+.place-card__bookmark-button[disabled],
+.offer__bookmark-button[disabled] {
+  transform: scale(0.3);
+}

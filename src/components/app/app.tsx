@@ -1,17 +1,29 @@
 import {RouterProvider} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useActionCreators} from '../../hooks';
 import LoadingScreen from '../../pages/loading/loading';
-import {router} from '../../router';
+import {router} from '../../router.tsx';
+import {useEffect, useState} from 'react';
+import {userActions} from '../../store/slice/user.ts';
+import {dataActions} from '../../store/slice/data.ts';
+import './../../style.css';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const {checkAuthAction} = useActionCreators(userActions);
+  const {fetchOffersCardAction, fetchFavoritesOffersCardAction} = useActionCreators(dataActions);
+  const [isDataLoaded, setDataLoaded] = useState(false);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown) {
-    return (
-      <LoadingScreen/>
-    );
+  // TODO: нужно предусмотреть, что делать, если данные не загрузятся
+  useEffect(() => {
+    Promise.all([
+      checkAuthAction(),
+      fetchOffersCardAction(),
+      fetchFavoritesOffersCardAction()
+    ]).then(() => setDataLoaded(true));
+  }, [checkAuthAction, fetchOffersCardAction, fetchFavoritesOffersCardAction]);
+
+  if (!isDataLoaded) {
+    return <LoadingScreen/>;
   }
 
   return (

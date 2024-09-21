@@ -10,8 +10,8 @@ type DetailMessageType = {
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
+  [StatusCodes.UNAUTHORIZED]: false,
+  [StatusCodes.NOT_FOUND]: false
 };
 
 const shouldDisplayError = (response: AxiosResponse) => Boolean(StatusCodeMapping[response.status]);
@@ -40,6 +40,9 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response: AxiosResponse) => response,
     (error: AxiosError<DetailMessageType>) => {
+      // Зачем тут такие костыли? Мне захотелось, чтобы toast.warn срабатывал не всегда
+      // При старте приложения идет запрос на проверку login и favorite. Там всегда ошибки,
+      // если пользователь незалогинен. Нет смысла показывать эти ошибки
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
         toast.warn(detailMessage.message);

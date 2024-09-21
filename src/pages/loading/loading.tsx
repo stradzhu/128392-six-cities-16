@@ -1,6 +1,7 @@
 import './style.css';
 
 function LoadingScreen(): JSX.Element {
+  // console.log('LoadingScreen');
   return (
     <div className="loading">
       <div className="loading__block">
