@@ -1,5 +1,6 @@
 import {OffersCardType} from '../../types/offer';
 import Card from '../card/card';
+import {memo} from 'react';
 
 type CardListProps = {
   offersCard: OffersCardType;
@@ -25,4 +26,6 @@ function CardList({offersCard, className, onOfferCardHover}: CardListProps): JSX
   );
 }
 
-export default CardList;
+const CardListMemo = memo(CardList);
+
+export default CardListMemo;
